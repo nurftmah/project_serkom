@@ -4,65 +4,110 @@
 
 <div class="container-fluid">
 
+    <!-- =========================
+         JUDUL
+    ========================= -->
     <div class="d-flex justify-content-between align-items-center mb-4">
+
         <div>
-            <h3 class="mb-1">Data Pengumuman</h3>
+            <h3 class="mb-1">
+                Data Pengumuman
+            </h3>
+
             <p class="text-muted mb-0">
                 Kelola pengumuman sekolah
             </p>
         </div>
 
-        <a href="{{ route('admin.pengumuman.create') }}"
-           class="btn btn-primary">
-            + Tambah Pengumuman
+
+        <!-- TAMBAH -->
+        <a
+            href="{{ route('admin.pengumuman.create') }}"
+            class="btn btn-primary"
+        >
+            <i class="bi bi-plus-lg"></i>
+            Tambah Pengumuman
         </a>
+
     </div>
 
 
-    {{-- Pesan sukses --}}
+
+    <!-- =========================
+         PESAN SUKSES
+    ========================= -->
     @if(session('success'))
+
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
+
     @endif
 
-    {{-- Pesan error --}}
+
+    <!-- =========================
+         PESAN ERROR
+    ========================= -->
     @if(session('error'))
+
         <div class="alert alert-danger">
             {{ session('error') }}
         </div>
+
     @endif
 
 
-    <div class="card shadow-sm">
+
+    <!-- =========================
+         CARD
+    ========================= -->
+    <div class="card border-0 shadow-sm">
 
         <div class="card-body">
 
-            {{-- Pencarian --}}
-            <form method="GET"
-                  action="{{ route('admin.pengumuman.index') }}"
-                  class="mb-3">
+
+            <!-- =========================
+                 SEARCH
+            ========================= -->
+            <form
+                action="{{ route('admin.pengumuman.index') }}"
+                method="GET"
+                class="mb-4"
+            >
 
                 <div class="row">
 
                     <div class="col-md-5">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control"
-                               placeholder="Cari pengumuman..."
-                               value="{{ $keyword }}">
+
+                        <input
+                            type="text"
+                            name="keyword"
+                            class="form-control"
+                            placeholder="Cari pengumuman..."
+                            value="{{ $keyword ?? '' }}"
+                        >
+
                     </div>
 
-                    <div class="col-md-2">
-                        <button type="submit"
-                                class="btn btn-primary">
+
+                    <div class="col-md-auto">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            <i class="bi bi-search"></i>
                             Cari
                         </button>
 
-                        <a href="{{ route('admin.pengumuman.index') }}"
-                           class="btn btn-secondary">
+
+                        <a
+                            href="{{ route('admin.pengumuman.index') }}"
+                            class="btn btn-secondary"
+                        >
                             Reset
                         </a>
+
                     </div>
 
                 </div>
@@ -70,101 +115,185 @@
             </form>
 
 
-            {{-- Tabel --}}
+
+            <!-- =========================
+                 TABEL
+            ========================= -->
             <div class="table-responsive">
 
-                <table class="table table-bordered table-hover">
+                <table class="table table-hover align-middle">
 
-                    <thead class="table-light">
+                    <thead>
 
                         <tr>
-                            <th width="60">No</th>
-                            <th>Judul</th>
-                            <th>Isi</th>
-                            <th>Tanggal</th>
-                            <th>Status</th>
-                            <th width="160">Aksi</th>
+
+                            <th width="60">
+                                No
+                            </th>
+
+                            <th>
+                                Judul
+                            </th>
+
+                            <th>
+                                Isi
+                            </th>
+
+                            <th width="150">
+                                Tanggal
+                            </th>
+
+                            <th width="120">
+                                Status
+                            </th>
+
+                            <th width="170" class="text-center">
+                                Aksi
+                            </th>
+
                         </tr>
 
                     </thead>
+
 
                     <tbody>
 
                         @forelse($pengumumans as $pengumuman)
 
-                        <tr>
+                            <tr>
 
-                            <td>
-                                {{ $loop->iteration }}
-                            </td>
-
-                            <td>
-                                {{ $pengumuman->judul }}
-                            </td>
-
-                            <td>
-                                {{ Str::limit($pengumuman->isi, 80) }}
-                            </td>
-
-                            <td>
-                                {{ date('d-m-Y', strtotime($pengumuman->tanggal)) }}
-                            </td>
-
-                            <td>
-
-                                @if($pengumuman->status == 'Publish')
-
-                                    <span class="badge bg-success">
-                                        Publish
-                                    </span>
-
-                                @else
-
-                                    <span class="badge bg-secondary">
-                                        Draft
-                                    </span>
-
-                                @endif
-
-                            </td>
-
-                            <td>
-
-                                <a href="{{ route('admin.pengumuman.edit', $pengumuman->id_pengumuman) }}"
-                                   class="btn btn-warning btn-sm">
-                                    Edit
-                                </a>
+                                <!-- NO -->
+                                <td>
+                                    {{ $loop->iteration }}
+                                </td>
 
 
-                                <form action="{{ route('admin.pengumuman.destroy', $pengumuman->id_pengumuman) }}"
-                                      method="POST"
-                                      class="d-inline">
+                                <!-- JUDUL -->
+                                <td>
 
-                                    @csrf
-                                    @method('DELETE')
+                                    <strong>
+                                        {{ $pengumuman->judul }}
+                                    </strong>
 
-                                    <button type="submit"
-                                            class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Yakin ingin menghapus pengumuman ini?')">
-                                        Hapus
-                                    </button>
+                                </td>
 
-                                </form>
 
-                            </td>
+                                <!-- ISI -->
+                                <td>
 
-                        </tr>
+                                    {{ Str::limit(
+                                        strip_tags($pengumuman->isi),
+                                        70
+                                    ) }}
+
+                                </td>
+
+
+                                <!-- TANGGAL -->
+                                <td>
+
+                                    {{ \Carbon\Carbon::parse(
+                                        $pengumuman->tanggal
+                                    )->format('d-m-Y') }}
+
+                                </td>
+
+
+                                <!-- STATUS -->
+                                <td>
+
+                                    @if($pengumuman->status == 'Publish')
+
+                                        <span class="badge bg-success">
+                                            Publish
+                                        </span>
+
+                                    @else
+
+                                        <span class="badge bg-secondary">
+                                            Draft
+                                        </span>
+
+                                    @endif
+
+                                </td>
+
+
+                                <!-- AKSI -->
+                                <td>
+
+                                    <div class="d-flex justify-content-center gap-2">
+
+                                        <!-- EDIT -->
+                                        <a
+                                            href="{{ route(
+                                                'admin.pengumuman.edit',
+                                                $pengumuman->id_pengumuman
+                                            ) }}"
+                                            class="btn btn-warning btn-sm"
+                                            title="Edit"
+                                        >
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+
+
+                                        <!-- HAPUS -->
+                                        <form
+                                            action="{{ route(
+                                                'admin.pengumuman.destroy',
+                                                $pengumuman->id_pengumuman
+                                            ) }}"
+                                            method="POST"
+                                            onsubmit="return confirm(
+                                                'Yakin ingin menghapus pengumuman ini?'
+                                            )"
+                                        >
+
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button
+                                                type="submit"
+                                                class="btn btn-danger btn-sm"
+                                                title="Hapus"
+                                            >
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
 
                         @empty
 
-                        <tr>
+                            <tr>
 
-                            <td colspan="6"
-                                class="text-center">
-                                Belum ada data pengumuman.
-                            </td>
+                                <td
+                                    colspan="6"
+                                    class="text-center py-5"
+                                >
 
-                        </tr>
+                                    <div class="text-muted">
+
+                                        <i
+                                            class="bi bi-megaphone"
+                                            style="font-size: 40px;"
+                                        ></i>
+
+                                        <p class="mt-2 mb-0">
+                                            Belum ada data pengumuman.
+                                        </p>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
 
                         @endforelse
 

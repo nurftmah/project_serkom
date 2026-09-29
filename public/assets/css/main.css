@@ -1630,43 +1630,36 @@ span.flatpickr-weekday {
 .footer-brand {
     display: flex;
     align-items: center;
-
     gap: 12px;
 }
 
-
 .footer-icon {
-    width: 42px;
-    height: 42px;
-
+    width: 45px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background: #eff6ff;
-    color: #2563eb;
-
+    background: #f1f5f9;
     border-radius: 10px;
-
-    font-size: 20px;
+    overflow: hidden;
 }
 
+.footer-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 4px;
+}
 
 .footer-brand h6 {
     margin: 0;
-
     font-size: 15px;
     font-weight: 700;
-
-    color: #1e293b;
 }
 
-
 .footer-brand p {
-    margin: 3px 0 0;
-
+    margin: 2px 0 0;
     font-size: 12px;
-
     color: #94a3b8;
 }
 
@@ -3323,5 +3316,644 @@ span.flatpickr-weekday {
     color: var(--brand-lime) !important;
 }
 
+/* =========================================================
+   DASHBOARD SEKOLAH
+========================================================= */
 
+.school-dashboard {
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.dashboard-welcome {
+    background: linear-gradient(135deg, #0f6b78, #1597a8);
+    border-radius: 18px;
+    padding: 28px 30px;
+    color: white;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-welcome::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    right: -50px;
+    top: -70px;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+}
+
+.welcome-small {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-bottom: 5px;
+}
+
+.welcome-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.welcome-text {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   STATISTIK
+========================================================= */
+
+.school-stat {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #edf1f5;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+    height: 100%;
+}
+
+.school-stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.school-stat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e8f7fa;
+    color: #1597a8;
+    font-size: 20px;
+}
+
+.school-stat-arrow {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.school-stat-label {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.school-stat-number {
+    font-size: 27px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.school-stat-info {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.school-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #edf1f5;
+    padding: 22px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+    height: 100%;
+}
+
+.school-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.school-card-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0;
+    color: #1e293b;
+}
+
+.school-card-link {
+    font-size: 12px;
+    color: #1597a8;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.school-card-link:hover {
+    color: #0f6b78;
+}
+
+
+/* =========================================================
+   BERITA
+========================================================= */
+
+.news-item {
+    display: flex;
+    gap: 13px;
+    padding: 13px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-image {
+    width: 65px;
+    height: 55px;
+    border-radius: 10px;
+    background: #e8f7fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1597a8;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.news-content {
+    flex: 1;
+}
+
+.news-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 4px;
+}
+
+.news-date {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   PENGUMUMAN
+========================================================= */
+
+.announcement-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 11px;
+    background: #f8fafc;
+}
+
+.announcement-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #fff4e5;
+    color: #f59e0b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.announcement-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 3px;
+}
+
+.announcement-date {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   PRESTASI
+========================================================= */
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.achievement-item:last-child {
+    border-bottom: none;
+}
+
+.achievement-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff7df;
+    color: #e7a400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.achievement-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.achievement-info {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   MENU CEPAT
+========================================================= */
+
+.quick-menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.quick-menu {
+    text-decoration: none;
+    background: #f8fafc;
+    border: 1px solid #eef2f6;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #475569;
+    transition: 0.2s;
+}
+
+.quick-menu:hover {
+    background: #e8f7fa;
+    color: #1597a8;
+    border-color: #c9edf1;
+}
+
+.quick-menu i {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: #e8f7fa;
+    color: #1597a8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quick-menu span {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   GALERI
+========================================================= */
+
+.gallery-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.gallery-item {
+    height: 95px;
+    border-radius: 11px;
+    background: #e8f7fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1597a8;
+    font-size: 24px;
+}
+
+/* =========================
+   FOTO PRESTASI
+========================= */
+
+.achievement-image {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff7df;
+    color: #e7a400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.achievement-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.achievement-content {
+    flex: 1;
+}
+
+
+/* =========================
+   GALERI FOTO
+========================= */
+
+.gallery-box {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+}
+
+.gallery-item {
+    height: 120px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #e8f7fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1597a8;
+    font-size: 25px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 30px;
+    color: #94a3b8;
+}
+
+.gallery-empty i {
+    font-size: 35px;
+}
+
+.gallery-empty p {
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+/* =========================
+   GALERI DASHBOARD
+========================= */
+
+.gallery-box {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+}
+
+.gallery-item {
+    width: 100%;
+    height: 130px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #e8f7fa;
+    border: 1px solid #eef2f6;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-empty {
+    width: 100%;
+    min-height: 130px;
+    grid-column: 1 / -1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #94a3b8;
+}
+
+.gallery-empty i {
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.gallery-empty p {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* =========================
+   LOGO LOGIN
+========================= */
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.login-logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
+
+.login-brand span {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1595a8;
+}
+
+/* =========================
+   SIDEBAR BRAND
+========================= */
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 20px;
+    color: white;
+}
+
+.sidebar-brand:hover {
+    color: white;
+}
+
+.brand-icon {
+    width: 48px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.brand-icon img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.sidebar-brand span {
+    font-size: 17px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1200px) {
+
+    .gallery-box {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .gallery-box {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .gallery-box {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+
+    .gallery-box {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .gallery-box {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-item {
+        height: 100px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .dashboard-welcome {
+        padding: 22px;
+    }
+
+    .welcome-title {
+        font-size: 21px;
+    }
+
+    .quick-menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-box {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .dashboard-welcome {
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .welcome-title {
+        font-size: 19px;
+    }
+
+    .welcome-text {
+        font-size: 12px;
+    }
+
+    .school-stat {
+        padding: 16px;
+    }
+
+    .school-card {
+        padding: 18px;
+    }
+
+    .school-card-title {
+        font-size: 15px;
+    }
+
+    .gallery-box {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-item {
+        height: 80px;
+    }
+
+}
 

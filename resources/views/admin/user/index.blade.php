@@ -170,7 +170,7 @@
                             </th>
 
                             <th>
-                                Level
+                                Role
                             </th>
 
                             <th>

@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Dashboard;
 use App\Http\Requests\StoreDashboardRequest;
 use App\Http\Requests\UpdateDashboardRequest;
+// use Illuminate\Support\Facades\DB;
+use App\Models\Guru;
+use App\Models\Siswa;
+use App\Models\Berita;
+use App\Models\Prestasi;
+use App\Models\Galeri;
+use App\Models\Pengumuman;
 
 class DashboardController extends Controller
 {
@@ -13,7 +20,29 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $totalGuru = Guru::count();
+        $totalSiswa = Siswa::count();
+        $totalBerita = Berita::count();
+        $totalPrestasi = Prestasi::count();
+
+        $beritaTerbaru = Berita::latest()->take(3)->get();
+
+        $pengumumanTerbaru = Pengumuman::latest()->take(3)->get();
+
+        $prestasiTerbaru = Prestasi::latest()->take(3)->get();
+
+        $galeriTerbaru = Galeri::latest()->take(6)->get();
+
+        return view('admin.dashboard', compact(
+            'totalGuru',
+            'totalSiswa',
+            'totalBerita',
+            'totalPrestasi',
+            'beritaTerbaru',
+            'pengumumanTerbaru',
+            'prestasiTerbaru',
+            'galeriTerbaru'
+        ));
     }
 
     /**

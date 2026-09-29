@@ -149,7 +149,7 @@
                         <div class="mb-4">
 
                             <label class="form-label">
-                                Level Pengguna
+                                Role
                             </label>
 
                             <select name="role" class="form-select">
@@ -247,7 +247,7 @@
                     <div class="info-item mb-3">
 
                         <span class="text-muted">
-                            Level
+                            Role
                         </span>
 
                         @if($user->role == 'Admin')

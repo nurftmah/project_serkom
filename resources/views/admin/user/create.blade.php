@@ -159,7 +159,7 @@
                         <div class="mb-4">
 
                             <label class="form-label">
-                                Level Pengguna
+                                Role
                             </label>
 
                             <select
@@ -169,7 +169,7 @@
                             >
 
                                 <option value="">
-                                    -- Pilih Level --
+                                    -- Pilih Role --
                                 </option>
 
                                 <option value="Admin"

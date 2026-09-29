@@ -191,7 +191,7 @@
                                         ) }}"
                                         class="btn btn-warning btn-sm"
                                     >
-                                        Edit
+                                       <i class="bi bi-pencil me-1"></i>
                                     </a>
 
 
@@ -214,7 +214,7 @@
                                             type="submit"
                                             class="btn btn-danger btn-sm"
                                         >
-                                            Hapus
+                                            <i class="bi bi-trash"></i>
                                         </button>
 
                                     </form>
