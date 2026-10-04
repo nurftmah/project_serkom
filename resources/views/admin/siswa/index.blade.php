@@ -1,59 +1,41 @@
+@php
+    use Illuminate\Support\Facades\Crypt;
+@endphp
+
 @extends('layouts.admin')
+
+@section('title', 'Data Siswa')
 
 @section('content')
 
 <div class="container-fluid">
 
-    {{-- =========================
-         JUDUL HALAMAN
-    ========================== --}}
+    <!-- HEADER -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-
         <div>
-
-            <h3 class="mb-1">
-                Data Siswa
-            </h3>
-
+            <h3 class="mb-1">Data Siswa</h3>
             <p class="text-muted mb-0">
                 Kelola data siswa sekolah
             </p>
-
         </div>
 
-
-        {{-- TOMBOL TAMBAH SISWA
-             HANYA UNTUK ADMIN --}}
         @auth
-
-            @if(Auth::user()->role === 'Admin')
-
+            @if (Auth::user()->role === 'Admin')
                 <a href="{{ route('admin.siswa.create') }}"
                    class="btn btn-primary">
-
                     <i class="bi bi-plus-lg me-1"></i>
                     Tambah Siswa
-
                 </a>
-
             @endif
-
         @endauth
-
     </div>
 
 
-
-    {{-- =========================
-         PESAN BERHASIL
-    ========================== --}}
-    @if(session('success'))
-
-        <div class="alert alert-success alert-dismissible fade show"
-             role="alert">
+    <!-- ALERT SUCCESS -->
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show">
 
             <i class="bi bi-check-circle me-2"></i>
-
             {{ session('success') }}
 
             <button type="button"
@@ -62,55 +44,82 @@
             </button>
 
         </div>
-
     @endif
 
 
-
-    {{-- =========================
-         CARD DATA SISWA
-    ========================== --}}
     <div class="card border-0 shadow-sm">
 
-        <div class="card-body p-4">
+        <div class="card-body">
+
+            <!-- ALERT ERROR -->
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show"
+                     role="alert">
+
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    {{ session('error') }}
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert">
+                    </button>
+
+                </div>
+            @endif
 
 
-            {{-- =========================
-                 SEARCH
-            ========================== --}}
+            <!-- FILTER JENIS KELAMIN -->
             <form action="{{ route('admin.siswa.index') }}"
                   method="GET"
                   class="mb-4">
 
                 <div class="row g-2">
 
-                    <div class="col-md-5">
+                    <div class="col-md-4">
 
-                        <input
-                            type="text"
-                            name="keyword"
-                            class="form-control"
-                            placeholder="Cari NISN atau nama siswa..."
-                            value="{{ $keyword ?? '' }}"
-                        >
+                        <select name="jenis_kelamin"
+                                class="form-select">
+
+                            <option value="">
+                                Semua Jenis Kelamin
+                            </option>
+
+                            <option value="Laki-Laki"
+                                {{ ($jenisKelamin ?? '') == 'Laki-Laki' ? 'selected' : '' }}>
+                                Laki-Laki
+                            </option>
+
+                            <option value="Perempuan"
+                                {{ ($jenisKelamin ?? '') == 'Perempuan' ? 'selected' : '' }}>
+                                Perempuan
+                            </option>
+
+                        </select>
 
                     </div>
 
 
-                    <div class="col-md-auto">
+                    <!-- FILTER -->
+                    <div class="col-md-2">
 
                         <button type="submit"
-                                class="btn btn-secondary">
+                                class="btn btn-primary w-100">
 
-                            <i class="bi bi-search me-1"></i>
-                            Cari
+                            <i class="bi bi-funnel me-1"></i>
+                            Filter
 
                         </button>
 
+                    </div>
+
+
+                    <!-- RESET -->
+                    <div class="col-md-2">
 
                         <a href="{{ route('admin.siswa.index') }}"
-                           class="btn btn-light">
+                           class="btn btn-secondary w-100">
 
+                            <i class="bi bi-arrow-counterclockwise me-1"></i>
                             Reset
 
                         </a>
@@ -122,41 +131,10 @@
             </form>
 
 
-
-            {{-- =========================
-                 INFO UNTUK OPERATOR
-            ========================== --}}
-            @auth
-
-                @if(Auth::user()->role === 'Operator')
-
-                    <div class="alert alert-info d-flex align-items-center mb-4">
-
-                        <i class="bi bi-info-circle me-2"></i>
-
-                        <div>
-
-                            Anda login sebagai
-                            <strong>Operator</strong>.
-
-                            Anda hanya dapat melihat data siswa.
-
-                        </div>
-
-                    </div>
-
-                @endif
-
-            @endauth
-
-
-
-            {{-- =========================
-                 TABEL DATA SISWA
-            ========================== --}}
+            <!-- TABLE -->
             <div class="table-responsive">
 
-                <table class="table table-hover align-middle mb-0">
+                <table class="table table-hover align-middle">
 
                     <thead class="table-light">
 
@@ -182,18 +160,12 @@
                                 Tahun Masuk
                             </th>
 
-
-                            {{-- KOLOM AKSI HANYA ADMIN --}}
                             @auth
-
-                                @if(Auth::user()->role === 'Admin')
-
-                                    <th width="180">
+                                @if (Auth::user()->role === 'Admin')
+                                    <th width="150">
                                         Aksi
                                     </th>
-
                                 @endif
-
                             @endauth
 
                         </tr>
@@ -203,110 +175,75 @@
 
                     <tbody>
 
-                        @forelse($siswas as $siswa)
+                        @forelse ($siswas as $siswa)
 
                             <tr>
 
-
-                                {{-- =====================
-                                     NO
-                                ====================== --}}
+                                <!-- NO -->
                                 <td>
-
                                     {{ $loop->iteration }}
-
                                 </td>
 
 
-
-                                {{-- =====================
-                                     NISN
-                                ====================== --}}
+                                <!-- NISN -->
                                 <td>
-
                                     {{ $siswa->nisn }}
-
                                 </td>
 
 
-
-                                {{-- =====================
-                                     NAMA SISWA
-                                ====================== --}}
+                                <!-- NAMA -->
                                 <td>
-
                                     <strong>
                                         {{ $siswa->nama_siswa }}
                                     </strong>
-
                                 </td>
 
 
-
-                                {{-- =====================
-                                     JENIS KELAMIN
-                                ====================== --}}
+                                <!-- JENIS KELAMIN -->
                                 <td>
-
                                     {{ $siswa->jenis_kelamin }}
-
                                 </td>
 
 
-
-                                {{-- =====================
-                                     TAHUN MASUK
-                                ====================== --}}
+                                <!-- TAHUN MASUK -->
                                 <td>
-
                                     {{ $siswa->tahun_masuk }}
-
                                 </td>
 
 
-
-                                {{-- =====================
-                                     AKSI
-                                     HANYA ADMIN
-                                ====================== --}}
+                                <!-- AKSI -->
                                 @auth
 
-                                    @if(Auth::user()->role === 'Admin')
+                                    @if (Auth::user()->role === 'Admin')
 
                                         <td>
 
+                                            <!-- EDIT -->
+                                            <a href="{{ route('admin.siswa.edit', [
+                                                'id' => Crypt::encryptString((string) $siswa->id_siswa)
+                                            ]) }}"
+                                               class="btn btn-sm btn-warning me-1">
 
-                                            {{-- EDIT --}}
-                                            <a
-                                                href="{{ route('admin.siswa.edit', $siswa->id_siswa) }}"
-                                                class="btn btn-sm btn-warning me-1"
-                                            >
-
-                                                <i class="bi bi-pencil me-1"></i>
+                                                <i class="bi bi-pencil"></i>
 
                                             </a>
 
 
-
-                                            {{-- HAPUS --}}
-                                            <form
-                                                action="{{ route('admin.siswa.destroy', $siswa->id_siswa) }}"
-                                                method="POST"
-                                                class="d-inline"
-                                            >
+                                            <!-- HAPUS -->
+                                            <form action="{{ route('admin.siswa.destroy', [
+                                                'id' => Crypt::encryptString((string) $siswa->id_siswa)
+                                            ]) }}"
+                                                  method="POST"
+                                                  class="d-inline">
 
                                                 @csrf
-
                                                 @method('DELETE')
 
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Yakin ingin menghapus data siswa ini?')">
 
-                                                <button
-                                                    type="submit"
-                                                    class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Yakin ingin menghapus data siswa ini?')"
-                                                >
-
-                                                    <i class="bi bi-trash me-1"></i>
+                                                    <i class="bi bi-trash"></i>
 
                                                 </button>
 
@@ -320,34 +257,22 @@
 
                             </tr>
 
-
                         @empty
 
-
-                            {{-- =====================
-                                 DATA KOSONG
-                            ====================== --}}
                             <tr>
 
-                                <td
-                                    colspan="{{ Auth::check() && Auth::user()->role === 'Admin' ? 6 : 5 }}"
-                                    class="text-center py-5"
-                                >
+                                <td colspan="6"
+                                    class="text-center py-5">
 
-                                    <div class="text-muted">
+                                    <i class="bi bi-people fs-1 text-muted d-block mb-3"></i>
 
-                                        <i class="bi bi-people fs-1"></i>
-
-                                        <p class="mt-3 mb-0">
-                                            Belum ada data siswa.
-                                        </p>
-
-                                    </div>
+                                    <span class="text-muted">
+                                        Belum ada data siswa.
+                                    </span>
 
                                 </td>
 
                             </tr>
-
 
                         @endforelse
 

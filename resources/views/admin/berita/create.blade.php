@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Tambah Berita')
+
 @section('content')
 
 <div class="container-fluid">
@@ -13,7 +15,6 @@
         </p>
 
     </div>
-
 
     @if($errors->any())
 
@@ -31,7 +32,6 @@
 
     @endif
 
-
     <div class="card border-0 shadow-sm">
 
         <div class="card-body">
@@ -43,7 +43,6 @@
             >
 
                 @csrf
-
 
                 <div class="mb-3">
 
@@ -63,6 +62,27 @@
 
                 </div>
 
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Slug
+                    </label>
+
+                    <input
+                        type="text"
+                        name="slug"
+                        class="form-control"
+                        maxlength="100"
+                        value="{{ old('slug') }}"
+                        placeholder="contoh: kegiatan-pembukaan-tahun-ajaran-baru"
+                        required
+                    >
+
+                    <small class="text-muted">
+                        Gunakan huruf kecil dan tanda hubung (-).
+                    </small>
+
+                </div>
 
                 <div class="mb-3">
 
@@ -80,7 +100,6 @@
 
                 </div>
 
-
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -96,7 +115,6 @@
                     >
 
                 </div>
-
 
                 <div class="mb-3">
 
@@ -118,28 +136,33 @@
 
                 </div>
 
-
                 <div class="mb-3">
 
                     <label class="form-label">
                         Status
                     </label>
 
-                    <select name="status"
-                            class="form-select"
-                            required>
+                    <select
+                        name="status"
+                        class="form-select"
+                        required
+                    >
 
                         <option value="">
                             -- Pilih Status --
                         </option>
 
-                        <option value="Publish"
-                            {{ old('status') == 'Publish' ? 'selected' : '' }}>
+                        <option
+                            value="Publish"
+                            {{ old('status') == 'Publish' ? 'selected' : '' }}
+                        >
                             Publish
                         </option>
 
-                        <option value="Draft"
-                            {{ old('status') == 'Draft' ? 'selected' : '' }}>
+                        <option
+                            value="Draft"
+                            {{ old('status') == 'Draft' ? 'selected' : '' }}
+                        >
                             Draft
                         </option>
 
@@ -147,22 +170,21 @@
 
                 </div>
 
-
                 <div class="mt-4">
 
-                    <a href="{{ route('admin.berita.index') }}"
-                       class="btn btn-secondary">
-
+                    <a
+                        href="{{ route('admin.berita.index') }}"
+                        class="btn btn-secondary"
+                    >
                         Kembali
-
                     </a>
 
-                    <button type="submit"
-                            class="btn btn-primary">
-
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
                         <i class="bi bi-save"></i>
-                        Simpan Berita
-
+                        Simpan Data
                     </button>
 
                 </div>

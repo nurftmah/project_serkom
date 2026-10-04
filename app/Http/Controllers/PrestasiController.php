@@ -4,38 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Prestasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class PrestasiController extends Controller
 {
-    // Menampilkan data prestasi
-    public function index(Request $request)
+    public function index()
     {
-        $keyword = $request->keyword;
+        $prestasis = Prestasi::orderBy('tahun_ajaran', 'desc')->get();
 
-        $prestasis = Prestasi::when($keyword, function ($query) use ($keyword) {
-
-            $query->where('nama_prestasi', 'like', '%' . $keyword . '%')
-                  ->orWhere('deskripsi', 'like', '%' . $keyword . '%');
-
-        })
-        ->orderBy('tahun_ajaran', 'desc')
-        ->get();
-
-        return view('admin.prestasi.index', compact(
-            'prestasis',
-            'keyword'
-        ));
+        return view('admin.prestasi.index', compact('prestasis'));
     }
 
-
-    // Form tambah prestasi
     public function create()
     {
         return view('admin.prestasi.create');
     }
 
-
-    // Menyimpan data prestasi
     public function store(Request $request)
     {
         $request->validate([
@@ -47,20 +32,20 @@ class PrestasiController extends Controller
 
         $namaFoto = null;
 
-        // Upload foto
         if ($request->hasFile('foto')) {
-
             $file = $request->file('foto');
 
             $namaFoto = time() . '_' . $file->getClientOriginalName();
 
-            $file->move(
-                public_path('uploads/prestasi'),
-                $namaFoto
-            );
+            $folder = public_path('uploads/prestasi');
+
+            if (!file_exists($folder)) {
+                mkdir($folder, 0777, true);
+            }
+
+            $file->move($folder, $namaFoto);
         }
 
-        // Simpan ke database
         Prestasi::create([
             'nama_prestasi' => $request->nama_prestasi,
             'deskripsi' => $request->deskripsi,
@@ -73,34 +58,106 @@ class PrestasiController extends Controller
             ->with('success', 'Data prestasi berhasil ditambahkan.');
     }
 
-
-    // Form edit
     public function edit($id)
     {
-        $prestasi = Prestasi::findOrFail($id);
+        try {
+            $id = Crypt::decryptString($id);
 
-        return view('admin.prestasi.edit', compact('prestasi'));
+            $prestasi = Prestasi::find($id);
+
+            if (!$prestasi) {
+                return redirect()
+                    ->route('admin.prestasi.index')
+                    ->with('error', 'Data prestasi tidak ditemukan.');
+            }
+
+            return view('admin.prestasi.edit', compact('prestasi'));
+
+        } catch (DecryptException $e) {
+            return redirect()
+                ->route('admin.prestasi.index')
+                ->with('error', 'Data prestasi tidak ditemukan.');
+        }
     }
 
-
-    // Update data prestasi
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama_prestasi' => 'required|max:40',
-            'deskripsi' => 'required',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'tahun_ajaran' => 'required|integer',
-        ]);
+        try {
+            $id = Crypt::decryptString($id);
 
-        $prestasi = Prestasi::findOrFail($id);
+            $prestasi = Prestasi::find($id);
 
-        $namaFoto = $prestasi->foto;
+            if (!$prestasi) {
+                return redirect()
+                    ->route('admin.prestasi.index')
+                    ->with('error', 'Data prestasi tidak ditemukan.');
+            }
 
-        // Jika upload foto baru
-        if ($request->hasFile('foto')) {
+            $request->validate([
+                'nama_prestasi' => 'required|max:40',
+                'deskripsi' => 'required',
+                'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'tahun_ajaran' => 'required|integer',
+            ]);
 
-            // Hapus foto lama
+            $namaFoto = $prestasi->foto;
+
+            if ($request->hasFile('foto')) {
+                if (
+                    $prestasi->foto &&
+                    file_exists(
+                        public_path('uploads/prestasi/' . $prestasi->foto)
+                    )
+                ) {
+                    unlink(
+                        public_path('uploads/prestasi/' . $prestasi->foto)
+                    );
+                }
+
+                $file = $request->file('foto');
+
+                $namaFoto = time() . '_' . $file->getClientOriginalName();
+
+                $folder = public_path('uploads/prestasi');
+
+                if (!file_exists($folder)) {
+                    mkdir($folder, 0777, true);
+                }
+
+                $file->move($folder, $namaFoto);
+            }
+
+            $prestasi->update([
+                'nama_prestasi' => $request->nama_prestasi,
+                'deskripsi' => $request->deskripsi,
+                'foto' => $namaFoto,
+                'tahun_ajaran' => $request->tahun_ajaran,
+            ]);
+
+            return redirect()
+                ->route('admin.prestasi.index')
+                ->with('success', 'Data prestasi berhasil diperbarui.');
+
+        } catch (DecryptException $e) {
+            return redirect()
+                ->route('admin.prestasi.index')
+                ->with('error', 'Data prestasi tidak ditemukan.');
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $id = Crypt::decryptString($id);
+
+            $prestasi = Prestasi::find($id);
+
+            if (!$prestasi) {
+                return redirect()
+                    ->route('admin.prestasi.index')
+                    ->with('error', 'Data prestasi tidak ditemukan.');
+            }
+
             if (
                 $prestasi->foto &&
                 file_exists(
@@ -112,50 +169,16 @@ class PrestasiController extends Controller
                 );
             }
 
-            $file = $request->file('foto');
+            $prestasi->delete();
 
-            $namaFoto = time() . '_' . $file->getClientOriginalName();
+            return redirect()
+                ->route('admin.prestasi.index')
+                ->with('success', 'Data prestasi berhasil dihapus.');
 
-            $file->move(
-                public_path('uploads/prestasi'),
-                $namaFoto
-            );
+        } catch (DecryptException $e) {
+            return redirect()
+                ->route('admin.prestasi.index')
+                ->with('error', 'Data prestasi tidak ditemukan.');
         }
-
-        $prestasi->update([
-            'nama_prestasi' => $request->nama_prestasi,
-            'deskripsi' => $request->deskripsi,
-            'foto' => $namaFoto,
-            'tahun_ajaran' => $request->tahun_ajaran,
-        ]);
-
-        return redirect()
-            ->route('admin.prestasi.index')
-            ->with('success', 'Data prestasi berhasil diperbarui.');
-    }
-
-
-    // Hapus data prestasi
-    public function destroy($id)
-    {
-        $prestasi = Prestasi::findOrFail($id);
-
-        // Hapus foto
-        if (
-            $prestasi->foto &&
-            file_exists(
-                public_path('uploads/prestasi/' . $prestasi->foto)
-            )
-        ) {
-            unlink(
-                public_path('uploads/prestasi/' . $prestasi->foto)
-            );
-        }
-
-        $prestasi->delete();
-
-        return redirect()
-            ->route('admin.prestasi.index')
-            ->with('success', 'Data prestasi berhasil dihapus.');
     }
 }

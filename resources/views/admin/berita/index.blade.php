@@ -1,12 +1,11 @@
 @extends('layouts.admin')
 
+@section('title', 'Data Berita')
+
 @section('content')
 
 <div class="container-fluid">
 
-    <!-- =========================
-         JUDUL
-    ========================== -->
     <div class="d-flex justify-content-between align-items-center mb-4">
 
         <div>
@@ -27,18 +26,10 @@
 
     </div>
 
-
-    <!-- =========================
-         CARD
-    ========================== -->
     <div class="card border-0 shadow-sm">
 
         <div class="card-body">
 
-
-            <!-- =========================
-                 PESAN SUKSES
-            ========================== -->
             @if(session('success'))
 
                 <div class="alert alert-success alert-dismissible fade show">
@@ -55,61 +46,25 @@
 
             @endif
 
+            @if(session('error'))
 
-            <!-- =========================
-                 SEARCH
-            ========================== -->
-            <form
-                action="{{ route('admin.berita.index') }}"
-                method="GET"
-                class="mb-4"
-            >
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
 
-                <div class="row">
+                    <i class="bi bi-exclamation-circle me-2"></i>
 
-                    <div class="col-md-5">
+                    {{ session('error') }}
 
-                        <input
-                            type="text"
-                            name="keyword"
-                            class="form-control"
-                            placeholder="Cari judul berita..."
-                            value="{{ $keyword ?? '' }}"
-                        >
-
-                    </div>
-
-
-                    <div class="col-md-auto">
-
-                        <button
-                            type="submit"
-                            class="btn btn-secondary"
-                        >
-
-                            <i class="bi bi-search"></i>
-                            Cari
-
-                        </button>
-
-
-                        <a
-                            href="{{ route('admin.berita.index') }}"
-                            class="btn btn-light"
-                        >
-                            Reset
-                        </a>
-
-                    </div>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                    </button>
 
                 </div>
 
-            </form>
+            @endif
 
-
-            <!-- =========================
-                 TABEL
-            ========================== -->
             <div class="table-responsive">
 
                 <table class="table table-hover align-middle">
@@ -128,6 +83,10 @@
 
                             <th>
                                 Judul
+                            </th>
+
+                            <th>
+                                Slug
                             </th>
 
                             <th>
@@ -150,27 +109,16 @@
 
                     </thead>
 
-
                     <tbody>
 
                         @forelse($beritas as $berita)
 
                         <tr>
 
-
-                            <!-- =====================
-                                 NO
-                            ====================== -->
                             <td>
-
                                 {{ $loop->iteration }}
-
                             </td>
 
-
-                            <!-- =====================
-                                 GAMBAR
-                            ====================== -->
                             <td>
 
                                 @if($berita->gambar)
@@ -179,10 +127,7 @@
                                         src="{{ asset('uploads/berita/' . $berita->gambar) }}"
                                         width="70"
                                         height="50"
-                                        style="
-                                            object-fit: cover;
-                                            border-radius: 6px;
-                                        "
+                                        style="object-fit: cover; border-radius: 6px;"
                                         alt="Gambar Berita"
                                     >
 
@@ -196,10 +141,6 @@
 
                             </td>
 
-
-                            <!-- =====================
-                                 JUDUL
-                            ====================== -->
                             <td>
 
                                 <strong>
@@ -208,39 +149,30 @@
 
                             </td>
 
+                            <td>
 
-                            <!-- =====================
-                                 ISI BERITA
-                            ====================== -->
+                                <span class="text-muted">
+                                    {{ $berita->slug }}
+                                </span>
+
+                            </td>
+
                             <td>
 
                                 <div style="max-width: 350px;">
 
-                                    {{ \Illuminate\Support\Str::limit(
-                                        $berita->isi,
-                                        120
-                                    ) }}
+                                    {{ \Illuminate\Support\Str::limit($berita->isi, 120) }}
 
                                 </div>
 
                             </td>
 
-
-                            <!-- =====================
-                                 TANGGAL
-                            ====================== -->
                             <td>
 
-                                {{ \Carbon\Carbon::parse(
-                                    $berita->tanggal
-                                )->format('d-m-Y') }}
+                                {{ \Carbon\Carbon::parse($berita->tanggal)->format('d-m-Y') }}
 
                             </td>
 
-
-                            <!-- =====================
-                                 STATUS
-                            ====================== -->
                             <td>
 
                                 @if($berita->status == 'Publish')
@@ -259,80 +191,50 @@
 
                             </td>
 
-
-                            <!-- =====================
-                                 AKSI
-                            ====================== -->
                             <td class="text-center">
 
-                                <div
-                                    class="d-flex justify-content-center gap-2"
-                                >
+                                <div class="d-flex justify-content-center gap-2">
 
-
-                                    <!-- EDIT -->
                                     <a
-                                        href="{{ route(
-                                            'admin.berita.edit',
-                                            $berita->id_berita
-                                        ) }}"
+                                        href="{{ route('admin.berita.edit', ['id' => Crypt::encryptString((string) $berita->id_berita)]) }}"
                                         class="btn btn-warning btn-sm"
                                         title="Edit"
                                     >
-
                                         <i class="bi bi-pencil"></i>
-
                                     </a>
 
-
-                                    <!-- HAPUS -->
                                     <form
-                                        action="{{ route(
-                                            'admin.berita.destroy',
-                                            $berita->id_berita
-                                        ) }}"
+                                        action="{{ route('admin.berita.destroy', ['id' => Crypt::encryptString((string) $berita->id_berita)]) }}"
                                         method="POST"
-                                        onsubmit="return confirm(
-                                            'Yakin ingin menghapus berita ini?'
-                                        )"
+                                        onsubmit="return confirm('Yakin ingin menghapus berita ini?')"
                                     >
 
                                         @csrf
 
                                         @method('DELETE')
 
-
                                         <button
                                             type="submit"
                                             class="btn btn-danger btn-sm"
                                             title="Hapus"
                                         >
-
                                             <i class="bi bi-trash"></i>
-
                                         </button>
 
                                     </form>
-
 
                                 </div>
 
                             </td>
 
-
                         </tr>
-
 
                         @empty
 
-
-                        <!-- =====================
-                             DATA KOSONG
-                        ====================== -->
                         <tr>
 
                             <td
-                                colspan="7"
+                                colspan="8"
                                 class="text-center py-5"
                             >
 
@@ -353,7 +255,6 @@
 
                         </tr>
 
-
                         @endforelse
 
                     </tbody>
@@ -361,7 +262,6 @@
                 </table>
 
             </div>
-
 
         </div>
 

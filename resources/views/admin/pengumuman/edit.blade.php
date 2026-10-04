@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Pengumuman')
 
 @section('content')
 
@@ -16,7 +17,7 @@
 
         <div class="card-body">
 
-            <form action="{{ route('admin.pengumuman.update', $pengumuman->id_pengumuman) }}"
+            <form action="{{ route('admin.pengumuman.update',  ['id' => Crypt::encryptString((string)$pengumuman->id_pengumuman)]) }}"
                   method="POST">
 
                 @csrf
@@ -118,12 +119,12 @@
 
                 <a href="{{ route('admin.pengumuman.index') }}"
                    class="btn btn-secondary">
-                    Kembali
+                    Batal
                 </a>
 
-                <button type="submit"
-                        class="btn btn-primary">
-                    Update
+                <button type="submit"class="btn btn-primary">
+                    <i class="bi bi-save"></i>
+                    Simpan Perubahan
                 </button>
 
             </form>

@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Pengumuman')
 
 @section('content')
 
@@ -48,13 +49,13 @@
     <!-- =========================
          PESAN ERROR
     ========================= -->
-    @if(session('error'))
+    {{-- @if(session('error'))
 
         <div class="alert alert-danger">
             {{ session('error') }}
         </div>
 
-    @endif
+    @endif --}}
 
 
 
@@ -64,57 +65,17 @@
     <div class="card border-0 shadow-sm">
 
         <div class="card-body">
+              @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    {{ session('error') }}
 
-
-            <!-- =========================
-                 SEARCH
-            ========================= -->
-            <form
-                action="{{ route('admin.pengumuman.index') }}"
-                method="GET"
-                class="mb-4"
-            >
-
-                <div class="row">
-
-                    <div class="col-md-5">
-
-                        <input
-                            type="text"
-                            name="keyword"
-                            class="form-control"
-                            placeholder="Cari pengumuman..."
-                            value="{{ $keyword ?? '' }}"
-                        >
-
-                    </div>
-
-
-                    <div class="col-md-auto">
-
-                        <button
-                            type="submit"
-                            class="btn btn-primary"
-                        >
-                            <i class="bi bi-search"></i>
-                            Cari
-                        </button>
-
-
-                        <a
-                            href="{{ route('admin.pengumuman.index') }}"
-                            class="btn btn-secondary"
-                        >
-                            Reset
-                        </a>
-
-                    </div>
-
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
                 </div>
-
-            </form>
-
-
+            @endif
 
             <!-- =========================
                  TABEL
@@ -226,10 +187,7 @@
 
                                         <!-- EDIT -->
                                         <a
-                                            href="{{ route(
-                                                'admin.pengumuman.edit',
-                                                $pengumuman->id_pengumuman
-                                            ) }}"
+                                            href="{{ route('admin.pengumuman.edit', ['id' => Crypt::encryptString((string)$pengumuman->id_pengumuman)] ) }}"
                                             class="btn btn-warning btn-sm"
                                             title="Edit"
                                         >
@@ -239,10 +197,7 @@
 
                                         <!-- HAPUS -->
                                         <form
-                                            action="{{ route(
-                                                'admin.pengumuman.destroy',
-                                                $pengumuman->id_pengumuman
-                                            ) }}"
+                                            action="{{ route('admin.pengumuman.destroy', ['id' => Crypt::encryptString((string)$pengumuman->id_pengumuman)]) }}"
                                             method="POST"
                                             onsubmit="return confirm(
                                                 'Yakin ingin menghapus pengumuman ini?'

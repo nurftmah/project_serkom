@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Galeri')
 
 @section('content')
 
@@ -175,7 +176,8 @@
                     type="submit"
                     class="btn btn-primary"
                 >
-                    Simpan
+                    <i class="bi bi-save"></i>
+                    Simpan Data
                 </button>
 
             </form>

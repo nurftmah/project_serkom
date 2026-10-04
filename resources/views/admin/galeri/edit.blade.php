@@ -1,35 +1,53 @@
 @extends('layouts.admin')
 
+@section('title', 'Edit Galeri')
+
 @section('content')
 
 <div class="container-fluid">
 
     <div class="mb-4">
+
         <h3>Edit Galeri</h3>
+
         <p class="text-muted">
             Ubah data galeri sekolah
         </p>
+
     </div>
 
+    @if($errors->any())
+
+        <div class="alert alert-danger">
+
+            <ul class="mb-0">
+
+                @foreach($errors->all() as $error)
+
+                    <li>{{ $error }}</li>
+
+                @endforeach
+
+            </ul>
+
+        </div>
+
+    @endif
 
     <div class="card border-0 shadow-sm">
 
         <div class="card-body">
 
             <form
-                action="{{ route(
-                    'admin.galeri.update',
-                    $galeri->id_galeri
-                ) }}"
+                action="{{ route('admin.galeri.update', ['id'=>Crypt::encryptString((string) $galeri->id_galeri)]) }}"
                 method="POST"
                 enctype="multipart/form-data"
             >
 
                 @csrf
+
                 @method('PUT')
 
-
-                <!-- JUDUL -->
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -45,15 +63,15 @@
                     >
 
                     @error('judul')
+
                         <small class="text-danger">
                             {{ $message }}
                         </small>
+
                     @enderror
 
                 </div>
 
-
-                <!-- KETERANGAN -->
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -68,15 +86,15 @@
                     >{{ old('keterangan', $galeri->keterangan) }}</textarea>
 
                     @error('keterangan')
+
                         <small class="text-danger">
                             {{ $message }}
                         </small>
+
                     @enderror
 
                 </div>
 
-
-                <!-- KATEGORI -->
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -89,13 +107,17 @@
                         required
                     >
 
-                        <option value="Foto"
-                            {{ old('kategori', $galeri->kategori) == 'Foto' ? 'selected' : '' }}>
+                        <option
+                            value="Foto"
+                            {{ old('kategori', $galeri->kategori) == 'Foto' ? 'selected' : '' }}
+                        >
                             Foto
                         </option>
 
-                        <option value="Video"
-                            {{ old('kategori', $galeri->kategori) == 'Video' ? 'selected' : '' }}>
+                        <option
+                            value="Video"
+                            {{ old('kategori', $galeri->kategori) == 'Video' ? 'selected' : '' }}
+                        >
                             Video
                         </option>
 
@@ -103,8 +125,6 @@
 
                 </div>
 
-
-                <!-- FILE LAMA -->
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -118,11 +138,11 @@
                         @if($galeri->kategori == 'Foto')
 
                             <img
-                                src="{{ asset(
-                                    'uploads/galeri/' . $galeri->file
-                                ) }}"
+                                src="{{ asset('uploads/galeri/' . $galeri->file) }}"
                                 width="150"
-                                style="border-radius: 8px;"
+                                height="100"
+                                style="object-fit: cover; border-radius: 8px;"
+                                alt="File Galeri"
                             >
 
                         @else
@@ -131,21 +151,26 @@
                                 width="250"
                                 controls
                             >
+
                                 <source
-                                    src="{{ asset(
-                                        'uploads/galeri/' . $galeri->file
-                                    ) }}"
+                                    src="{{ asset('uploads/galeri/' . $galeri->file) }}"
+                                    type="video/mp4"
                                 >
+
                             </video>
 
                         @endif
+
+                    @else
+
+                        <span class="text-muted">
+                            Tidak ada file
+                        </span>
 
                     @endif
 
                 </div>
 
-
-                <!-- FILE BARU -->
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -164,8 +189,6 @@
 
                 </div>
 
-
-                <!-- TANGGAL -->
                 <div class="mb-4">
 
                     <label class="form-label">
@@ -176,30 +199,25 @@
                         type="date"
                         name="tanggal"
                         class="form-control"
-                        value="{{ old(
-                            'tanggal',
-                            $galeri->tanggal
-                        ) }}"
+                        value="{{ old('tanggal', $galeri->tanggal) }}"
                         required
                     >
 
                 </div>
 
-
-                <!-- BUTTON -->
-
                 <a
                     href="{{ route('admin.galeri.index') }}"
                     class="btn btn-secondary"
                 >
-                    Kembali
+                    Batal
                 </a>
 
                 <button
                     type="submit"
                     class="btn btn-primary"
                 >
-                    Update
+                    <i class="bi bi-save"></i>
+                    Simpan Perubahan
                 </button>
 
             </form>

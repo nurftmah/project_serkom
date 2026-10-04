@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Guru')
 
 @section('content')
 
@@ -132,22 +133,22 @@
 
                 <!-- BUTTON -->
                 <div>
-
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                    >
-                        <i class="bi bi-save"></i>
-                        Simpan
-                    </button>
-
-
                     <a
                         href="{{ route('admin.guru.index') }}"
                         class="btn btn-secondary"
                     >
                         Kembali
                     </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        <i class="bi bi-save"></i>
+                        Simpan Data
+                    </button>
+
+
 
                 </div>
 

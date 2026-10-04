@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Siswa')
 
 @section('content')
 
@@ -43,7 +44,7 @@
 
         <div class="card-body">
 
-            <form action="{{ route('admin.siswa.update', $siswa->id_siswa) }}"
+            <form action="{{ route('admin.siswa.update',  ['id' => Crypt::encryptString((string)$siswa->id_siswa)]) }}"
                   method="POST">
 
                 @csrf
@@ -142,27 +143,16 @@
 
                     <a href="{{ route('admin.siswa.index') }}"
                        class="btn btn-secondary">
-
-                        Kembali
-
+                       Batal
                     </a>
 
-                    <button type="submit"
-                            class="btn btn-primary">
-
+                    <button type="submit" class="btn btn-primary">
                         <i class="bi bi-save"></i>
-                        Update Data
-
+                        Simpan Perubahan
                     </button>
-
                 </div>
-
             </form>
-
         </div>
-
     </div>
-
 </div>
-
 @endsection

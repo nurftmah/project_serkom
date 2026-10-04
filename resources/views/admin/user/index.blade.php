@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data User')
 
 @section('content')
 
@@ -124,6 +125,30 @@
 
     </div>
 
+     {{-- =========================
+            SEARCH
+    ========================== --}}
+            <form action="{{ route('admin.user.index') }}"
+                  method="GET"
+                  class="mb-4">
+
+                <div class="row g-2">
+                    <div class="col-md-5">
+                        <input  type="text" name="keyword" class="form-control" placeholder="Cari Username" value="{{ $keyword ?? '' }}">
+                    </div>
+
+                    <div class="col-md-auto">
+                        <button type="submit" class="btn btn-secondary">
+                            <i class="bi bi-search me-1"></i>
+                            Cari
+                        </button>
+
+                        <a href="{{ route('admin.user.index') }}" class="btn btn-light">
+                            Reset
+                        </a>
+                    </div>
+                </div>
+            </form>
 
     <!-- TABLE -->
     <div class="card border-0 shadow-sm">
@@ -244,7 +269,7 @@
                                 <td class="text-center">
 
                                     <!-- EDIT -->
-                                    <a href="{{ route('admin.user.edit', $user->id) }}"
+                                    <a href="{{ route('admin.user.edit', ['id' => Crypt::encryptString((string)$user->id)]) }}"
                                        class="btn btn-sm btn-warning"
                                        title="Edit">
 
@@ -252,9 +277,8 @@
 
                                     </a>
 
-
                                     <!-- HAPUS -->
-                                    <form action="{{ route('admin.user.destroy', $user->id) }}"
+                                    <form action="{{ route('admin.user.destroy', ['id' => Crypt::encryptString((string)$user->id)]) }}"
                                           method="POST"
                                           class="d-inline">
 

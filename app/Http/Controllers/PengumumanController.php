@@ -3,35 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengumuman;
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class PengumumanController extends Controller
 {
-    // Menampilkan semua pengumuman
-    public function index(Request $request)
+    public function index()
     {
-        $keyword = $request->keyword;
+        $pengumumans = Pengumuman::orderBy('tanggal', 'desc')->get();
 
-        $pengumumans = Pengumuman::when($keyword, function ($query) use ($keyword) {
-            $query->where('judul', 'like', '%' . $keyword . '%')
-                  ->orWhere('isi', 'like', '%' . $keyword . '%');
-        })
-        ->orderBy('tanggal', 'desc')
-        ->get();
-
-        return view('admin.pengumuman.index', compact('pengumumans', 'keyword'));
+        return view('admin.pengumuman.index', compact('pengumumans'));
     }
 
-
-    // Menampilkan form tambah
     public function create()
     {
         return view('admin.pengumuman.create');
     }
 
-
-    // Menyimpan pengumuman
     public function store(Request $request)
     {
         $request->validate([
@@ -41,11 +31,8 @@ class PengumumanController extends Controller
             'status' => 'required|in:Publish,Draft',
         ]);
 
-        // Ambil user pertama yang tersedia
-        $user = User::first();
-
-        if (!$user) {
-            return back()->with('error', 'Data user belum tersedia.');
+        if (!Auth::check()) {
+            return back()->with('error', 'User belum login.');
         }
 
         Pengumuman::create([
@@ -53,7 +40,7 @@ class PengumumanController extends Controller
             'isi' => $request->isi,
             'tanggal' => $request->tanggal,
             'status' => $request->status,
-            'id_user' => $user->id,
+            'id_user' => Auth::id(),
         ]);
 
         return redirect()
@@ -61,50 +48,89 @@ class PengumumanController extends Controller
             ->with('success', 'Pengumuman berhasil ditambahkan.');
     }
 
-
-    // Menampilkan form edit
     public function edit($id)
     {
-        $pengumuman = Pengumuman::findOrFail($id);
+        try {
+            $id = Crypt::decryptString($id);
 
-        return view('admin.pengumuman.edit', compact('pengumuman'));
+            $pengumuman = Pengumuman::find($id);
+
+            if (!$pengumuman) {
+                return redirect()
+                    ->route('admin.pengumuman.index')
+                    ->with('error', 'Data pengumuman tidak ditemukan.');
+            }
+
+            return view('admin.pengumuman.edit', compact('pengumuman'));
+
+        } catch (DecryptException $e) {
+            return redirect()
+                ->route('admin.pengumuman.index')
+                ->with('error', 'Data pengumuman tidak ditemukan.');
+        }
     }
 
-
-    // Mengupdate pengumuman
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'judul' => 'required|max:50',
-            'isi' => 'required',
-            'tanggal' => 'required|date',
-            'status' => 'required|in:Publish,Draft',
-        ]);
+        try {
+            $id = Crypt::decryptString($id);
 
-        $pengumuman = Pengumuman::findOrFail($id);
+            $pengumuman = Pengumuman::find($id);
 
-        $pengumuman->update([
-            'judul' => $request->judul,
-            'isi' => $request->isi,
-            'tanggal' => $request->tanggal,
-            'status' => $request->status,
-        ]);
+            if (!$pengumuman) {
+                return redirect()
+                    ->route('admin.pengumuman.index')
+                    ->with('error', 'Data pengumuman tidak ditemukan.');
+            }
 
-        return redirect()
-            ->route('admin.pengumuman.index')
-            ->with('success', 'Pengumuman berhasil diperbarui.');
+            $request->validate([
+                'judul' => 'required|max:50',
+                'isi' => 'required',
+                'tanggal' => 'required|date',
+                'status' => 'required|in:Publish,Draft',
+            ]);
+
+            $pengumuman->update([
+                'judul' => $request->judul,
+                'isi' => $request->isi,
+                'tanggal' => $request->tanggal,
+                'status' => $request->status,
+            ]);
+
+            return redirect()
+                ->route('admin.pengumuman.index')
+                ->with('success', 'Pengumuman berhasil diperbarui.');
+
+        } catch (DecryptException $e) {
+            return redirect()
+                ->route('admin.pengumuman.index')
+                ->with('error', 'Data pengumuman tidak ditemukan.');
+        }
     }
 
-
-    // Menghapus pengumuman
     public function destroy($id)
     {
-        $pengumuman = Pengumuman::findOrFail($id);
+        try {
+            $id = Crypt::decryptString($id);
 
-        $pengumuman->delete();
+            $pengumuman = Pengumuman::find($id);
 
-        return redirect()
-            ->route('admin.pengumuman.index')
-            ->with('success', 'Pengumuman berhasil dihapus.');
+            if (!$pengumuman) {
+                return redirect()
+                    ->route('admin.pengumuman.index')
+                    ->with('error', 'Data pengumuman tidak ditemukan.');
+            }
+
+            $pengumuman->delete();
+
+            return redirect()
+                ->route('admin.pengumuman.index')
+                ->with('success', 'Pengumuman berhasil dihapus.');
+
+        } catch (DecryptException $e) {
+            return redirect()
+                ->route('admin.pengumuman.index')
+                ->with('error', 'Data pengumuman tidak ditemukan.');
+        }
     }
 }

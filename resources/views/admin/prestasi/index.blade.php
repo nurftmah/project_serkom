@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Prestasi')
 
 @section('content')
 
@@ -38,53 +39,23 @@
 
         <div class="card-body">
 
-            <!-- SEARCH -->
-            <form action="{{ route('admin.prestasi.index') }}"
-                  method="GET"
-                  class="mb-4">
+             @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    {{ session('error') }}
 
-                <div class="row">
-
-                    <div class="col-md-5">
-
-                        <input
-                            type="text"
-                            name="keyword"
-                            class="form-control"
-                            placeholder="Cari prestasi..."
-                            value="{{ $keyword ?? '' }}"
-                        >
-
-                    </div>
-
-                    <div class="col-md-auto">
-
-                        <button type="submit"
-                                class="btn btn-secondary">
-                            Cari
-                        </button>
-
-                        <a href="{{ route('admin.prestasi.index') }}"
-                           class="btn btn-light">
-                            Reset
-                        </a>
-
-                    </div>
-
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
                 </div>
-
-            </form>
-
-
+            @endif
+            
             <!-- TABEL -->
             <div class="table-responsive">
-
                 <table class="table table-hover align-middle">
-
                     <thead>
-
                         <tr>
-
                             <th width="50">
                                 No
                             </th>
@@ -110,10 +81,7 @@
                             </th>
 
                         </tr>
-
                     </thead>
-
-
                     <tbody>
 
                         @forelse($prestasis as $prestasi)
@@ -185,10 +153,7 @@
                                 <div class="d-flex gap-1">
 
                                     <a
-                                        href="{{ route(
-                                            'admin.prestasi.edit',
-                                            $prestasi->id_prestasi
-                                        ) }}"
+                                        href="{{ route('admin.prestasi.edit', ['id' => Crypt::encryptString((string)$prestasi->id_prestasi)]) }}"
                                         class="btn btn-warning btn-sm"
                                     >
                                        <i class="bi bi-pencil me-1"></i>
@@ -196,10 +161,7 @@
 
 
                                     <form
-                                        action="{{ route(
-                                            'admin.prestasi.destroy',
-                                            $prestasi->id_prestasi
-                                        ) }}"
+                                        action="{{ route('admin.prestasi.destroy', ['id' => Crypt::encryptString((string)$prestasi->id_prestasi)]) }}"
                                         method="POST"
                                         onsubmit="return confirm(
                                             'Yakin ingin menghapus prestasi ini?'
@@ -218,11 +180,8 @@
                                         </button>
 
                                     </form>
-
                                 </div>
-
                             </td>
-
                         </tr>
 
                         @empty

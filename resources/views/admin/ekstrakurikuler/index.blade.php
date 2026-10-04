@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Ekstrakurikuler')
 
 @section('content')
 
@@ -42,7 +43,7 @@
         <div class="card-body">
 
             {{-- SEARCH --}}
-            <form action="{{ route('admin.ekstrakurikuler.index') }}"
+            {{-- <form action="{{ route('admin.ekstrakurikuler.index') }}"
                   method="GET"
                   class="mb-4">
 
@@ -81,9 +82,19 @@
 
                 </div>
 
-            </form>
+            </form> --}}
 
+               @if(session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-circle me-2"></i>
+                        {{ session('error') }}
 
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                    </div>
+                @endif
             {{-- TABEL --}}
             <div class="table-responsive">
 
@@ -175,10 +186,7 @@
                                 <td>
 
                                     {{-- EDIT --}}
-                                    <a href="{{ route(
-                                        'admin.ekstrakurikuler.edit',
-                                        $ekstrakurikuler->id_ekskul
-                                    ) }}"
+                                    <a href="{{ route('admin.ekstrakurikuler.edit',  ['id' => Crypt::encryptString((string) $ekstrakurikuler->id_ekskul)]) }}"
                                        class="btn btn-sm btn-warning">
 
                                         <i class="bi bi-pencil"></i>
@@ -188,10 +196,7 @@
 
                                     {{-- HAPUS --}}
                                     <form
-                                        action="{{ route(
-                                            'admin.ekstrakurikuler.destroy',
-                                            $ekstrakurikuler->id_ekskul
-                                        ) }}"
+                                        action="{{ route('admin.ekstrakurikuler.destroy', ['id' => Crypt::encryptString((string)$ekstrakurikuler->id_ekskul)]) }}"
                                         method="POST"
                                         class="d-inline"
                                     >

@@ -1,8 +1,8 @@
 @extends('layouts.admin')
-
+@section('title', 'Dashboard')
 @section('content')
 
-  <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}"> --}}
 
 <div class="school-dashboard">
 
@@ -330,7 +330,7 @@
              PRESTASI TERBARU
         ================================================== -->
 
-        <div class="col-lg-6">
+        <div class="col-12">
 
             <div class="school-card">
 
@@ -429,7 +429,7 @@
 
 
 
-        <!-- =================================================
+        {{-- <!-- =================================================
              AKSES CEPAT
         ================================================== -->
 
@@ -536,7 +536,7 @@
 
             </div>
 
-        </div>
+        </div> --}}
 
     </div>
 

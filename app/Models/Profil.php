@@ -21,7 +21,8 @@ class Profil extends Model
         'npsn',
         'alamat',
         'kontak',
-        'visi_misi',
+        'visi',
+        'misi',
         'tahun_berdiri',
         'deskripsi'
     ];

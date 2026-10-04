@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MTS AL-AZHAR</title>
+    <title>MTS AL-AZHAR | @yield('title')</title>
 
     <link rel="icon" type="image/png" href="{{ asset('assets/images/logo_mts.png') }}">
 
@@ -17,6 +18,10 @@
 
     <!-- CSS Utama -->
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/datatables.min.css') }}">
+
 </head>
 
 <body>
@@ -25,15 +30,28 @@
     <div class="sidebar-wrapper" id="sidebar">
 
         <!-- LOGO -->
-        <a href="{{ route('admin.dashboard') }}" class="sidebar-brand text-decoration-none">
+        {{-- <a href="{{ route('admin.dashboard') }}" class="sidebar-brand text-decoration-none">
 
             <div class="brand-icon">
-               <img src="{{ asset('assets/images/logo_mts.png') }}" alt="Logo MTS Al-Azhar">
+                <img src="{{ asset('assets/images/logo_mts.png') }}" alt="Logo MTS Al-Azhar">
             </div>
 
             <span>MTS AL-AZHAR</span>
 
-        </a>
+        </a> --}}
+     <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
+        <div class="sidebar-logo">
+            @if($profilSidebar && $profilSidebar->logo)
+                <img src="{{ asset('uploads/profil/' . $profilSidebar->logo) }}" alt="Logo Sekolah">
+            @else
+                <img src="{{ asset('assets/images/logo_mts.png') }}" alt="Logo Sekolah">
+            @endif
+        </div>
+
+        <div class="sidebar-school-name">
+            {{ $profilSidebar->nama_sekolah ?? 'MTS AL-AZHAR' }}
+        </div>
+    </a>
 
 
         <!-- MENU -->
@@ -53,42 +71,33 @@
 
                         <a href="{{ route('admin.dashboard') }}"
                            class="sidebar-menu-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-
                             <i class="bi bi-house-door-fill"></i>
-
                             <span>Dashboard</span>
-
                         </a>
 
                     </li>
 
-
                     <!-- User -->
-                   @auth
+                    @auth
                         @if(Auth::user()->role === 'Admin')
 
                             <li class="sidebar-menu-item">
-
                                 <a href="{{ route('admin.user.index') }}"
                                 class="sidebar-menu-link {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
-
                                     <i class="bi bi-person-gear"></i>
-
                                     <span>User</span>
-
                                 </a>
-
                             </li>
 
                         @endif
                     @endauth
 
 
-                    <!-- Profil Sekolah -->
+                    <!-- Profil Akun -->
                     <li class="sidebar-menu-item">
 
-                        <a href="{{ route('admin.profil') }}"
-                           class="sidebar-menu-link {{ request()->routeIs('admin.profil') ? 'active' : '' }}">
+                        <a href="{{ route('admin.profil.index') }}"
+                           class="sidebar-menu-link {{ request()->routeIs('admin.profil.index') ? 'active' : '' }}">
 
                             <i class="bi bi-building"></i>
 
@@ -266,10 +275,10 @@
     <!-- ================= MAIN ================= -->
     <div class="main-wrapper">
 
-
         <!-- ================= NAVBAR ================= -->
         <header class="navbar-custom">
 
+            <!-- NAVBAR KIRI -->
             <div class="navbar-left">
 
                 <!-- Toggle Desktop -->
@@ -277,36 +286,28 @@
                     class="btn-desktop-toggle d-none d-xl-flex align-items-center justify-content-center me-3"
                     id="desktop-sidebar-toggle"
                     aria-label="Minimize Sidebar">
-
                     <i class="bi bi-chevron-bar-left"></i>
-
                 </button>
-
 
                 <!-- Toggle Mobile -->
                 <button
                     class="sidebar-toggle-btn me-2"
                     id="sidebar-toggle"
                     aria-label="Toggle Navigation">
-
                     <i class="bi bi-list"></i>
-
                 </button>
-
 
                 <!-- Judul -->
                 <div class="navbar-page-title">
-
                     <span>
                         SchoolHub
                     </span>
-
                 </div>
 
             </div>
 
 
-            <!-- NAVBAR KANAN -->
+            <!-- NAVBAR KANAN (Posisi Admin & Notifikasi) -->
             <div class="navbar-actions">
 
                 <!-- Notifikasi -->
@@ -314,13 +315,11 @@
                     class="navbar-action-btn"
                     type="button"
                     title="Notifikasi">
-
                     <i class="bi bi-bell"></i>
-
                 </button>
 
 
-                <!-- Admin -->
+                <!-- Admin / Profil -->
                 <div class="dropdown ms-3">
 
                     <button
@@ -331,21 +330,16 @@
 
                         <!-- ICON PROFIL TANPA FOTO -->
                         <div class="navbar-profile-icon">
-
                             <i class="bi bi-person-fill"></i>
-
                         </div>
-
 
                         <!-- USERNAME -->
                         <span class="navbar-profile-name d-none d-md-inline">
-
                             @auth
                                 {{ Auth::user()->username }}
                             @else
                                 Administrator
                             @endauth
-
                         </span>
 
                         <i class="bi bi-chevron-down navbar-profile-caret"></i>
@@ -356,91 +350,50 @@
                     <!-- DROPDOWN -->
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-profile">
 
-                        <li class="dropdown-header">
-
-                            @auth
-                                Akun {{ Auth::user()->username }}
-                            @else
-                                Akun Administrator
-                            @endauth
-
-                        </li>
-
-
                         <li>
-
-                            <a
-                                class="dropdown-item"
-                                href="{{ route('admin.profil') }}">
-
-                                <i class="bi bi-building me-2"></i>
-
-                                Profil Sekolah
-
+                            <a href="{{ route('admin.user.profil') }}" class="dropdown-item">
+                                <i class="bi bi-person-circle me-2"></i>
+                                Profil Akun
                             </a>
-
                         </li>
 
-
                         <li>
-
                             <a
                                 class="dropdown-item"
                                 href="{{ route('admin.user.index') }}">
-
                                 <i class="bi bi-person-gear me-2"></i>
-
                                 Pengelola Web
-
                             </a>
-
                         </li>
 
 
                         <li>
-
                             <hr class="dropdown-divider">
-
                         </li>
 
 
                         <!-- LOGOUT -->
                         <li>
-
                             @auth
-
                                 <form
                                     action="{{ route('logout') }}"
                                     method="POST">
-
                                     @csrf
-
                                     <button
                                         type="submit"
                                         class="dropdown-item text-danger">
-
                                         <i class="bi bi-box-arrow-right me-2"></i>
-
                                         Logout
-
                                     </button>
-
                                 </form>
-
                             @else
-
                                 <a
                                     href="{{ route('login')}}"
                                     class="dropdown-item text-danger">
-
                                     <i class="bi bi-box-arrow-right me-2"></i>
-
                                     Logout
-
                                 </a>
-
                             @endauth
-
                         </li>
 
                     </ul>
@@ -502,7 +455,7 @@
 
                     <h6>Data Sekolah</h6>
 
-                    <a href="{{ route('admin.profil') }}">
+                    <a href="{{ route('admin.profil.index') }}">
 
                         <i class="bi bi-building"></i>
 
@@ -646,7 +599,7 @@
                     <span>
 
                         <i class="bi bi-shield-check"></i>
-                            SchoolHub
+                        SchoolHub
 
                     </span>
 
@@ -663,6 +616,7 @@
 
         </footer>
 
+
     </div>
 
 
@@ -671,6 +625,18 @@
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.table').DataTable();
+        });
+    </script>
 
 </body>
 

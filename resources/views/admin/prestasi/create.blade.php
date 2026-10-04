@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Prestasi')
 
 @section('content')
 
@@ -141,11 +142,9 @@
                     Kembali
                 </a>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary"
-                >
-                    Simpan
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save"></i>
+                    Simpan Data
                 </button>
 
             </form>

@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Edit Ekstrakurikuler')
+
 @section('content')
 
 <div class="container-fluid">
@@ -14,8 +16,6 @@
 
     </div>
 
-
-    {{-- ERROR --}}
     @if($errors->any())
 
         <div class="alert alert-danger">
@@ -36,25 +36,20 @@
 
     @endif
 
-
     <div class="card border-0 shadow-sm">
 
         <div class="card-body">
 
             <form
-                action="{{ route(
-                    'admin.ekstrakurikuler.update',
-                    $ekstrakurikuler->id_ekskul
-                ) }}"
+                action="{{ route('admin.ekstrakurikuler.update',  ['id' => Crypt::encryptString((string) $ekstrakurikuler->id_ekskul)]) }}"
                 method="POST"
                 enctype="multipart/form-data"
             >
 
                 @csrf
+
                 @method('PUT')
 
-
-                {{-- NAMA --}}
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -66,17 +61,12 @@
                         name="nama_ekskul"
                         class="form-control"
                         maxlength="40"
-                        value="{{ old(
-                            'nama_ekskul',
-                            $ekstrakurikuler->nama_ekskul
-                        ) }}"
+                        value="{{ old('nama_ekskul', $ekstrakurikuler->nama_ekskul) }}"
                         required
                     >
 
                 </div>
 
-
-                {{-- PEMBINA --}}
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -88,17 +78,12 @@
                         name="pembina"
                         class="form-control"
                         maxlength="40"
-                        value="{{ old(
-                            'pembina',
-                            $ekstrakurikuler->pembina
-                        ) }}"
+                        value="{{ old('pembina', $ekstrakurikuler->pembina) }}"
                         required
                     >
 
                 </div>
 
-
-                {{-- JADWAL --}}
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -110,17 +95,12 @@
                         name="jadwal_latihan"
                         class="form-control"
                         maxlength="40"
-                        value="{{ old(
-                            'jadwal_latihan',
-                            $ekstrakurikuler->jadwal_latihan
-                        ) }}"
+                        value="{{ old('jadwal_latihan', $ekstrakurikuler->jadwal_latihan) }}"
                         required
                     >
 
                 </div>
 
-
-                {{-- DESKRIPSI --}}
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -132,15 +112,10 @@
                         class="form-control"
                         rows="5"
                         required
-                    >{{ old(
-                        'deskripsi',
-                        $ekstrakurikuler->deskripsi
-                    ) }}</textarea>
+                    >{{ old('deskripsi', $ekstrakurikuler->deskripsi) }}</textarea>
 
                 </div>
 
-
-                {{-- GAMBAR LAMA --}}
                 @if($ekstrakurikuler->gambar)
 
                     <div class="mb-3">
@@ -152,20 +127,17 @@
                         <br>
 
                         <img
-                            src="{{ asset(
-                                'uploads/ekstrakurikuler/' .
-                                $ekstrakurikuler->gambar
-                            ) }}"
+                            src="{{ asset('uploads/ekstrakurikuler/' . $ekstrakurikuler->gambar) }}"
                             width="150"
-                            style="border-radius: 8px;"
+                            height="100"
+                            style="object-fit: cover; border-radius: 8px;"
+                            alt="Gambar Ekstrakurikuler"
                         >
 
                     </div>
 
                 @endif
 
-
-                {{-- GAMBAR BARU --}}
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -185,33 +157,19 @@
 
                 </div>
 
-
-                {{-- BUTTON --}}
                 <div class="mt-4">
 
-                    <a href="{{ route('admin.ekstrakurikuler.index') }}"
-                       class="btn btn-secondary">
-
-                        Kembali
-
+                    <a href="{{ route('admin.ekstrakurikuler.index') }}" class="btn btn-secondary">
+                        Batal
                     </a>
 
-                    <button type="submit"
-                            class="btn btn-primary">
-
+                    <button type="submit" class="btn btn-primary">
                         <i class="bi bi-save"></i>
-                        Update Data
-
+                        Simpan Perubahan
                     </button>
-
                 </div>
-
             </form>
-
         </div>
-
     </div>
-
 </div>
-
 @endsection

@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Siswa')
 
 @section('content')
 
@@ -155,7 +156,7 @@
                             class="btn btn-primary">
 
                         <i class="bi bi-save"></i>
-                        Simpan
+                        Simpan Data
 
                     </button>
 

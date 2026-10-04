@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Guru')
 
 @section('content')
 
@@ -84,7 +85,7 @@
             {{-- =========================
                  SEARCH
             ========================== --}}
-            <form
+            {{-- <form
                 action="{{ route('admin.guru.index') }}"
                 method="GET"
                 class="mb-4"
@@ -132,7 +133,7 @@
 
                 </div>
 
-            </form>
+            </form> --}}
 
 
 
@@ -163,6 +164,17 @@
             @endauth
 
 
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    {{ session('error') }}
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            @endif
 
             {{-- =========================
                  TABEL
@@ -312,10 +324,7 @@
 
                                             {{-- EDIT --}}
                                             <a
-                                                href="{{ route(
-                                                    'admin.guru.edit',
-                                                    $guru->id_guru
-                                                ) }}"
+                                                href="{{ route('admin.guru.edit',['id' => Crypt::encryptString((string) $guru->id_guru)]) }}"
                                                 class="btn btn-warning btn-sm"
                                                 title="Edit"
                                             >
@@ -328,10 +337,7 @@
 
                                             {{-- HAPUS --}}
                                             <form
-                                                action="{{ route(
-                                                    'admin.guru.destroy',
-                                                    $guru->id_guru
-                                                ) }}"
+                                                action="{{ route('admin.guru.destroy', ['id' => Crypt::encryptString((string)$guru->id_guru)]) }}"
                                                 method="POST"
                                                 onsubmit="return confirm(
                                                     'Yakin ingin menghapus data guru ini?'

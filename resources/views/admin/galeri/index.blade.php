@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Galeri')
 
 @section('content')
 
@@ -38,7 +39,7 @@
 
 
             <!-- SEARCH -->
-            <form action="{{ route('admin.galeri.index') }}"
+            {{-- <form action="{{ route('admin.galeri.index') }}"
                   method="GET"
                   class="mb-4">
 
@@ -71,8 +72,19 @@
 
                 </div>
 
-            </form>
+            </form> --}}
 
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    {{ session('error') }}
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            @endif
 
             <!-- TABEL -->
             <div class="table-responsive">
@@ -198,10 +210,7 @@
                                 <div class="d-flex gap-1">
 
                                     <a
-                                        href="{{ route(
-                                            'admin.galeri.edit',
-                                            $galeri->id_galeri
-                                        ) }}"
+                                        href="{{ route('admin.galeri.edit',  ['id' => Crypt::encryptString((string) $galeri->id_galeri)]) }}"
                                         class="btn btn-warning btn-sm"
                                     >
                                         <i class="bi bi-pencil me-1"></i>
@@ -209,10 +218,7 @@
 
 
                                     <form
-                                        action="{{ route(
-                                            'admin.galeri.destroy',
-                                            $galeri->id_galeri
-                                        ) }}"
+                                        action="{{ route('admin.galeri.destroy',  ['id' => Crypt::encryptString((string) $galeri->id_galeri)]) }}"
                                         method="POST"
                                         onsubmit="return confirm(
                                             'Yakin ingin menghapus data ini?'

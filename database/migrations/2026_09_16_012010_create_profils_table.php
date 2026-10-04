@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string ('npsn',10);
             $table->text('alamat');
             $table->string ('kontak',15);
-            $table->text('visi_misi');
+            $table->text('visi');
+            $table->text('misi');
             $table->year('tahun_berdiri');
             $table->text('deskripsi');
             $table->timestamps();

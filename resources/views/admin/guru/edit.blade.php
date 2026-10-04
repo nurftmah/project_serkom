@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Guru')
 
 @section('content')
 
@@ -22,11 +23,10 @@
         <div class="card-body">
 
             <form
-                action="{{ route('admin.guru.update', $guru->id_guru) }}"
+                action="{{ route('admin.guru.update',  ['id' => Crypt::encryptString((string)$guru->id_guru)]) }}"
                 method="POST"
                 enctype="multipart/form-data"
             >
-
                 @csrf
 
                 @method('PUT')
@@ -167,23 +167,14 @@
 
                 <!-- BUTTON -->
                 <div>
+                    <a href="{{ route('admin.guru.index') }}" class="btn btn-secondary">
+                        Batal
+                    </a>
 
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                    >
+                    <button type="submit" class="btn btn-primary">
                         <i class="bi bi-save"></i>
                         Simpan Perubahan
                     </button>
-
-
-                    <a
-                        href="{{ route('admin.guru.index') }}"
-                        class="btn btn-secondary"
-                    >
-                        Kembali
-                    </a>
-
                 </div>
 
             </form>

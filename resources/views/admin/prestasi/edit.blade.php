@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Data Prestasi')
 
 @section('content')
 
@@ -44,10 +45,7 @@
         <div class="card-body">
 
             <form
-                action="{{ route(
-                    'admin.prestasi.update',
-                    $prestasi->id_prestasi
-                ) }}"
+                action="{{ route('admin.prestasi.update',  ['id' => Crypt::encryptString((string)$prestasi->id_prestasi)]) }}"
                 method="POST"
                 enctype="multipart/form-data"
             >
@@ -180,14 +178,15 @@
                     href="{{ route('admin.prestasi.index') }}"
                     class="btn btn-secondary"
                 >
-                    Kembali
+                    Batal
                 </a>
 
                 <button
                     type="submit"
                     class="btn btn-primary"
                 >
-                    Update
+                    <i class="bi bi-save"></i>
+                    Simpan Perubahan
                 </button>
 
             </form>
