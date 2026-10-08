@@ -190,7 +190,7 @@
 
 
                             <button type="submit"
-                                    class="btn btn-primary">
+                                    class="btn btn-green">
 
                                 <i class="bi bi-save me-1"></i>
 
@@ -290,73 +290,5 @@
 
 </div>
 
-
-<style>
-
-    .card {
-        border-radius: 15px;
-    }
-
-
-    .form-label {
-        font-weight: 600;
-        color: #34495e;
-    }
-
-
-    .form-control,
-    .form-select {
-        border-radius: 8px;
-        padding: 10px 13px;
-    }
-
-
-    .form-control:focus,
-    .form-select:focus {
-        border-color: #1595a8;
-        box-shadow: 0 0 0 0.2rem rgba(21, 149, 168, 0.15);
-    }
-
-
-    .btn-primary {
-        background: #1595a8;
-        border-color: #1595a8;
-        border-radius: 8px;
-        padding: 9px 16px;
-    }
-
-
-    .btn-primary:hover {
-        background: #117f90;
-        border-color: #117f90;
-    }
-
-
-    .user-info-icon {
-        width: 70px;
-        height: 70px;
-
-        border-radius: 50%;
-
-        background: #e3f6fa;
-        color: #1595a8;
-
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 30px;
-    }
-
-
-    .info-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        padding: 10px 0;
-    }
-
-</style>
 
 @endsection

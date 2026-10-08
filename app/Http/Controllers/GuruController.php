@@ -29,6 +29,35 @@ class GuruController extends Controller
         return view('admin.guru.index', compact('gurus', 'keyword'));
     }
 
+    public function publicIndex()
+{
+    $gurus = Guru::orderBy('nama_guru', 'asc')->get();
+
+    return view('landing.guru', compact('gurus'));
+}
+
+public function show($id)
+{
+    try {
+        $idGuru = Crypt::decryptString($id);
+
+        $guru = Guru::where('id_guru', $idGuru)->first();
+
+        if (!$guru) {
+            return redirect()
+                ->route('guru.public')
+                ->with('error', 'Data guru tidak ditemukan.');
+        }
+
+        return view('landing.detail-guru', compact('guru'));
+
+    } catch (DecryptException $e) {
+        return redirect()
+            ->route('guru.public')
+            ->with('error', 'Data guru tidak ditemukan.');
+    }
+}
+
 
     // =========================
     // FORM TAMBAH GURU

@@ -212,7 +212,7 @@
 
                             <button
                                 type="submit"
-                                class="btn btn-primary"
+                                class="btn btn-green"
                             >
 
                                 <i class="bi bi-save me-1"></i>

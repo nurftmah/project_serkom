@@ -17,7 +17,7 @@
         </div>
 
         <a href="{{ route('admin.ekstrakurikuler.create') }}"
-           class="btn btn-primary">
+           class="btn btn-green">
 
             <i class="bi bi-plus-lg"></i>
             Tambah Ekstrakurikuler

@@ -23,10 +23,22 @@
             <ul class="mb-0">
 
                 @foreach($errors->all() as $error)
+
                     <li>{{ $error }}</li>
+
                 @endforeach
 
             </ul>
+
+        </div>
+
+    @endif
+
+    @if(session('error'))
+
+        <div class="alert alert-danger">
+
+            {{ session('error') }}
 
         </div>
 
@@ -81,6 +93,21 @@
                     <small class="text-muted">
                         Gunakan huruf kecil dan tanda hubung (-).
                     </small>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Penulis
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        value="{{ Auth::user()->username }}"
+                        readonly
+                    >
 
                 </div>
 
@@ -181,7 +208,7 @@
 
                     <button
                         type="submit"
-                        class="btn btn-primary"
+                        class="btn btn-green"
                     >
                         <i class="bi bi-save"></i>
                         Simpan Data

@@ -272,7 +272,7 @@
                     </a>
 
                     <button type="submit"
-                            class="btn btn-primary px-4 rounded-pill shadow-sm">
+                            class="btn btn-green px-4 rounded-pill shadow-sm">
 
                         <i class="fas fa-save me-2"></i>
 

@@ -18,7 +18,7 @@
 
         <a
             href="{{ route('admin.berita.create') }}"
-            class="btn btn-primary"
+            class="btn btn-green"
         >
             <i class="bi bi-plus"></i>
             Tambah Berita
@@ -26,29 +26,26 @@
 
     </div>
 
+    @if(session('success'))
+
+        <div class="alert alert-success alert-dismissible fade show">
+
+            {{ session('success') }}
+
+        </div>
+
+    @endif
+
     <div class="card border-0 shadow-sm">
 
         <div class="card-body">
 
-            @if(session('success'))
-
-                <div class="alert alert-success alert-dismissible fade show">
-
-                    {{ session('success') }}
-
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert">
-                    </button>
-
-                </div>
-
-            @endif
-
             @if(session('error'))
 
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div
+                    class="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                >
 
                     <i class="bi bi-exclamation-circle me-2"></i>
 
@@ -58,8 +55,8 @@
                         type="button"
                         class="btn-close"
                         data-bs-dismiss="alert"
-                        aria-label="Close">
-                    </button>
+                        aria-label="Close"
+                    ></button>
 
                 </div>
 
@@ -87,6 +84,10 @@
 
                             <th>
                                 Slug
+                            </th>
+
+                            <th>
+                                Penulis
                             </th>
 
                             <th>
@@ -159,6 +160,14 @@
 
                             <td>
 
+                                <span class="fw-semibold">
+                                    {{ $berita->user->username ?? 'Tidak diketahui' }}
+                                </span>
+
+                            </td>
+
+                            <td>
+
                                 <div style="max-width: 350px;">
 
                                     {{ \Illuminate\Support\Str::limit($berita->isi, 120) }}
@@ -196,7 +205,7 @@
                                 <div class="d-flex justify-content-center gap-2">
 
                                     <a
-                                        href="{{ route('admin.berita.edit', ['id' => Crypt::encryptString((string) $berita->id_berita)]) }}"
+                                        href="{{ route('admin.berita.edit',  ['slug' => $berita->slug]) }}"
                                         class="btn btn-warning btn-sm"
                                         title="Edit"
                                     >
@@ -204,7 +213,7 @@
                                     </a>
 
                                     <form
-                                        action="{{ route('admin.berita.destroy', ['id' => Crypt::encryptString((string) $berita->id_berita)]) }}"
+                                        action="{{ route('admin.berita.destroy', ['slug' => $berita->slug]) }}"
                                         method="POST"
                                         onsubmit="return confirm('Yakin ingin menghapus berita ini?')"
                                     >
@@ -234,7 +243,7 @@
                         <tr>
 
                             <td
-                                colspan="8"
+                                colspan="9"
                                 class="text-center py-5"
                             >
 

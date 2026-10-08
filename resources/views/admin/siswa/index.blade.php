@@ -22,7 +22,7 @@
         @auth
             @if (Auth::user()->role === 'Admin')
                 <a href="{{ route('admin.siswa.create') }}"
-                   class="btn btn-primary">
+                   class="btn btn-green">
                     <i class="bi bi-plus-lg me-1"></i>
                     Tambah Siswa
                 </a>
@@ -31,19 +31,13 @@
     </div>
 
 
-    <!-- ALERT SUCCESS -->
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
+      {{-- PESAN SUKSES --}}
+    @if(session('success'))
 
-            <i class="bi bi-check-circle me-2"></i>
+        <div class="alert alert-success">
             {{ session('success') }}
-
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-            </button>
-
         </div>
+
     @endif
 
 
@@ -103,7 +97,7 @@
                     <div class="col-md-2">
 
                         <button type="submit"
-                                class="btn btn-primary w-100">
+                                class="btn btn-green w-100">
 
                             <i class="bi bi-funnel me-1"></i>
                             Filter

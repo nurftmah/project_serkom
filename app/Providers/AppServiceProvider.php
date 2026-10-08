@@ -8,19 +8,17 @@ use App\Models\Profil;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-         View::share('profilSidebar', Profil::first());
+        $profil = Profil::first();
+
+        View::share('profil', $profil);
+        View::share('profils', $profil);
+        View::share('profilSidebar', $profil);
     }
 }

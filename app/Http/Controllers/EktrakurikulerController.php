@@ -6,6 +6,7 @@ use App\Models\Ektrakurikuler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Str;
 
 class EktrakurikulerController extends Controller
 {
@@ -69,6 +70,7 @@ class EktrakurikulerController extends Controller
 
         Ektrakurikuler::create([
             'nama_ekskul' => $request->nama_ekskul,
+            'slug' => Str::slug($request->nama_ekskul),
             'pembina' => $request->pembina,
             'jadwal_latihan' => $request->jadwal_latihan,
             'deskripsi' => $request->deskripsi,
@@ -174,6 +176,7 @@ class EktrakurikulerController extends Controller
 
             $ekstrakurikuler->update([
                 'nama_ekskul' => $request->nama_ekskul,
+                'slug' => Str::slug($request->nama_ekskul),
                 'pembina' => $request->pembina,
                 'jadwal_latihan' => $request->jadwal_latihan,
                 'deskripsi' => $request->deskripsi,

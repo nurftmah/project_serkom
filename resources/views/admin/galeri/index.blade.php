@@ -16,26 +16,26 @@
         </div>
 
         <a href="{{ route('admin.galeri.create') }}"
-           class="btn btn-primary">
+           class="btn btn-green">
             + Tambah Galeri
         </a>
 
     </div>
 
+    <!-- PESAN -->
+    @if(session('success'))
+
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+
+    @endif
 
     <!-- CARD -->
     <div class="card border-0 shadow-sm">
 
         <div class="card-body">
 
-            <!-- PESAN -->
-            @if(session('success'))
-
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-
-            @endif
 
 
             <!-- SEARCH -->

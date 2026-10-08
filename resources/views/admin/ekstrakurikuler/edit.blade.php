@@ -163,7 +163,7 @@
                         Batal
                     </a>
 
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-green">
                         <i class="bi bi-save"></i>
                         Simpan Perubahan
                     </button>

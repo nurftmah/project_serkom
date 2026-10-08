@@ -16,7 +16,7 @@
             </p>
         </div>
 
-        <a href="{{ route('admin.user.create') }}" class="btn btn-primary">
+        <a href="{{ route('admin.user.create') }}" class="btn btn-green">
             <i class="bi bi-person-plus-fill me-1"></i>
             Tambah Pengelola
         </a>
@@ -128,7 +128,7 @@
      {{-- =========================
             SEARCH
     ========================== --}}
-            <form action="{{ route('admin.user.index') }}"
+            {{-- <form action="{{ route('admin.user.index') }}"
                   method="GET"
                   class="mb-4">
 
@@ -148,7 +148,7 @@
                         </a>
                     </div>
                 </div>
-            </form>
+            </form> --}}
 
     <!-- TABLE -->
     <div class="card border-0 shadow-sm">
@@ -326,7 +326,7 @@
                                     </p>
 
                                     <a href="{{ route('admin.user.create') }}"
-                                       class="btn btn-primary btn-sm">
+                                       class="btn btn-green btn-sm">
 
                                         <i class="bi bi-person-plus-fill me-1"></i>
 
@@ -352,101 +352,5 @@
 
 </div>
 
-
-<style>
-
-    /* INFO CARD */
-    .operator-info-card {
-        background: #ffffff;
-        border-radius: 15px;
-        padding: 20px;
-
-        display: flex;
-        align-items: center;
-
-        gap: 15px;
-
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    }
-
-
-    /* ICON */
-    .operator-icon {
-        width: 50px;
-        height: 50px;
-
-        border-radius: 12px;
-
-        background: #e3f6fa;
-        color: #1595a8;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 22px;
-    }
-
-
-    /* LABEL */
-    .operator-label {
-        color: #7b8794;
-        font-size: 13px;
-
-        margin-bottom: 3px;
-    }
-
-
-    /* NUMBER */
-    .operator-number {
-        font-size: 25px;
-        font-weight: 700;
-
-        color: #1f2937;
-    }
-
-
-    /* CARD */
-    .card {
-        border-radius: 15px;
-        overflow: hidden;
-    }
-
-
-    /* TABLE */
-    .table th {
-        font-size: 13px;
-        font-weight: 600;
-
-        color: #566573;
-
-        white-space: nowrap;
-    }
-
-
-    .table td {
-        font-size: 14px;
-
-        color: #34495e;
-    }
-
-
-    /* BUTTON */
-    .btn-primary {
-        background: #1595a8;
-        border-color: #1595a8;
-
-        border-radius: 8px;
-
-        padding: 9px 16px;
-    }
-
-
-    .btn-primary:hover {
-        background: #117f90;
-        border-color: #117f90;
-    }
-
-</style>
 
 @endsection

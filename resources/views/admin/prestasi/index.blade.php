@@ -17,7 +17,7 @@
         </div>
 
         <a href="{{ route('admin.prestasi.create') }}"
-           class="btn btn-primary">
+           class="btn btn-green">
             + Tambah Prestasi
         </a>
 
@@ -50,7 +50,7 @@
                             aria-label="Close"></button>
                 </div>
             @endif
-            
+
             <!-- TABEL -->
             <div class="table-responsive">
                 <table class="table table-hover align-middle">

@@ -19,7 +19,7 @@
         </div>
 
         <a href="{{ route('admin.profil.edit', $profil->id_profil) }}"
-           class="btn btn-primary px-4 py-2 rounded-pill shadow-sm fw-semibold">
+           class="btn btn-green px-4 py-2 rounded-pill shadow-sm fw-semibold">
 
             <i class="fas fa-edit me-2"></i>
             Edit Profil Sekolah

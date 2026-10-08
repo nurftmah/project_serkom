@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('prestasis', function (Blueprint $table) {
             $table->id('id_prestasi');
             $table->string('nama_prestasi', 40);
+            $table->string('slug', 100)->unique();
             $table->text('deskripsi');
             $table->string ('foto',100);
             $table->year('tahun_ajaran');

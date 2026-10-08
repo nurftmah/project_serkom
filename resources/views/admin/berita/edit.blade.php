@@ -7,27 +7,41 @@
 <div class="container-fluid">
 
     <div class="mb-4">
+
         <h3 class="mb-1">Edit Berita</h3>
 
         <p class="text-muted mb-0">
             Perbarui data berita sekolah
         </p>
+
     </div>
 
     @if($errors->any())
+
         <div class="alert alert-danger">
+
             <ul class="mb-0">
+
                 @foreach($errors->all() as $error)
+
                     <li>{{ $error }}</li>
+
                 @endforeach
+
             </ul>
+
         </div>
+
     @endif
 
     @if(session('error'))
+
         <div class="alert alert-danger">
+
             {{ session('error') }}
+
         </div>
+
     @endif
 
     <div class="card border-0 shadow-sm">
@@ -35,12 +49,13 @@
         <div class="card-body">
 
             <form
-                action="{{ route('admin.berita.update', ['id' => \Illuminate\Support\Facades\Crypt::encryptString((string) $berita->id_berita)]) }}"
+                action="{{ route('admin.berita.update', ['slug' => $berita->slug]) }}"
                 method="POST"
                 enctype="multipart/form-data"
             >
 
                 @csrf
+
                 @method('PUT')
 
                 <div class="mb-3">
@@ -75,7 +90,27 @@
                         required
                     >
 
+                    <small class="text-muted">
+                        Slug digunakan sebagai alamat berita.
+                    </small>
+
                 </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Penulis
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        value="{{ $berita->user->username ?? 'Tidak diketahui' }}"
+                        readonly
+                    >
+
+                </div>
+
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -191,7 +226,7 @@
 
                     <button
                         type="submit"
-                        class="btn btn-primary"
+                        class="btn btn-green"
                     >
                         <i class="bi bi-save"></i>
                         Simpan Perubahan

@@ -6,6 +6,7 @@ use App\Models\Prestasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Str;
 
 class PrestasiController extends Controller
 {
@@ -48,6 +49,7 @@ class PrestasiController extends Controller
 
         Prestasi::create([
             'nama_prestasi' => $request->nama_prestasi,
+            'slug' => Str::slug($request->nama_prestasi),
             'deskripsi' => $request->deskripsi,
             'foto' => $namaFoto,
             'tahun_ajaran' => $request->tahun_ajaran,
@@ -61,9 +63,9 @@ class PrestasiController extends Controller
     public function edit($id)
     {
         try {
-            $id = Crypt::decryptString($id);
+            $idPrestasi = Crypt::decryptString($id);
 
-            $prestasi = Prestasi::find($id);
+            $prestasi = Prestasi::where('id_prestasi', $idPrestasi)->first();
 
             if (!$prestasi) {
                 return redirect()
@@ -83,9 +85,9 @@ class PrestasiController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $id = Crypt::decryptString($id);
+            $idPrestasi = Crypt::decryptString($id);
 
-            $prestasi = Prestasi::find($id);
+            $prestasi = Prestasi::where('id_prestasi', $idPrestasi)->first();
 
             if (!$prestasi) {
                 return redirect()
@@ -103,6 +105,7 @@ class PrestasiController extends Controller
             $namaFoto = $prestasi->foto;
 
             if ($request->hasFile('foto')) {
+
                 if (
                     $prestasi->foto &&
                     file_exists(
@@ -129,6 +132,7 @@ class PrestasiController extends Controller
 
             $prestasi->update([
                 'nama_prestasi' => $request->nama_prestasi,
+                'slug' => Str::slug($request->nama_prestasi),
                 'deskripsi' => $request->deskripsi,
                 'foto' => $namaFoto,
                 'tahun_ajaran' => $request->tahun_ajaran,
@@ -148,9 +152,9 @@ class PrestasiController extends Controller
     public function destroy($id)
     {
         try {
-            $id = Crypt::decryptString($id);
+            $idPrestasi = Crypt::decryptString($id);
 
-            $prestasi = Prestasi::find($id);
+            $prestasi = Prestasi::where('id_prestasi', $idPrestasi)->first();
 
             if (!$prestasi) {
                 return redirect()

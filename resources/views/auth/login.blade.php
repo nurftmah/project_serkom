@@ -7,10 +7,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>LOGIN - MTS AL-AZHAR</title>
+    <title>{{ $profil?->nama_sekolah ?? 'MTS AL-AZHAR' }} | Login</title>
 
-    <link rel="icon" type="image/png" href="{{ asset('assets/images/logo_mts.png') }}">
-
+    <link rel="icon"
+          type="image/png"
+          href="{{ $profil?->logo
+              ? asset('uploads/profil/' . $profil->logo)
+              : asset('assets/images/logo_mts.png') }}">
 
     <!-- Bootstrap -->
     <link rel="stylesheet"
@@ -45,13 +48,20 @@
 
 
         <!-- BRAND -->
+        <div class="login-brand d-flex align-items-center justify-content-center gap-2">
 
-        <div class="login-brand">
+            <div class="ratio ratio-1x1" style="width: 70px;">
+                <img
+                    src="{{ $profil?->logo
+                        ? asset('uploads/profil/' . $profil->logo)
+                        : asset('assets/images/logo_mts.png') }}"
+                    alt="{{ $profil?->nama_sekolah ?? 'Logo Sekolah' }}"
+                    class="img-fluid object-fit-contain"
+                >
+            </div>
 
-             <img src="{{ asset('assets/images/logo_mts.png') }}"alt="Logo Sekolah" class="login-logo">
-
-            <span>
-                MTS AL-AZHAR
+            <span class="fw-semibold">
+                {{ $profil?->nama_sekolah ?? 'MTS AL-AZHAR' }}
             </span>
 
         </div>
@@ -180,10 +190,10 @@
 
             <button
                 type="submit"
-                class="btn btn-primary w-100"
+                class="btn btn-success w-100"
                 style="
-                    background:#1595a8;
-                    border-color:#1595a8;
+                    /* background:#1595a8;
+                    border-color:#1595a8; */
                     border-radius:10px;
                     padding:12px;
                     font-weight:600;
@@ -206,7 +216,7 @@
 
             <small class="text-muted">
 
-                SchoolHub
+                {{ $profil?->nama_sekolah ?? 'SchoolHub' }}
 
             </small>
 

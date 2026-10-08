@@ -13,6 +13,7 @@ class EktrakurikulerSeeder extends Seeder
             [
                 'id_ekskul' => 1,
                 'nama_ekskul' => 'Pramuka',
+                'slug' => 'pramuka',
                 'pembina' => 'Ahmad Fauzi',
                 'jadwal_latihan' => 'Jumat, 14.00 - 16.00',
                 'deskripsi' => 'Kegiatan kepramukaan untuk membentuk kemandirian, kedisiplinan, dan kerja sama siswa.',
@@ -21,6 +22,7 @@ class EktrakurikulerSeeder extends Seeder
             [
                 'id_ekskul' => 2,
                 'nama_ekskul' => 'Futsal',
+                'slug' => 'futsal',
                 'pembina' => 'Dedi Kurniawan',
                 'jadwal_latihan' => 'Sabtu, 08.00 - 10.00',
                 'deskripsi' => 'Kegiatan olahraga futsal untuk mengembangkan kemampuan dan sportivitas siswa.',

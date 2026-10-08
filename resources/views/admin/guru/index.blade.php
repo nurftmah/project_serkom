@@ -5,10 +5,6 @@
 
 <div class="container-fluid">
 
-
-    {{-- =========================
-         JUDUL
-    ========================== --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
 
         <div>
@@ -24,17 +20,13 @@
         </div>
 
 
-        {{-- =========================
-             TAMBAH GURU
-             HANYA ADMIN
-        ========================== --}}
         @auth
 
             @if(Auth::user()->role === 'Admin')
 
                 <a
                     href="{{ route('admin.guru.create') }}"
-                    class="btn btn-primary"
+                    class="btn btn-green"
                 >
 
                     <i class="bi bi-plus me-1"></i>
@@ -49,97 +41,21 @@
 
     </div>
 
+      {{-- PESAN SUKSES --}}
+    @if(session('success'))
+
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+
+    @endif
 
 
-    {{-- =========================
-         CARD
-    ========================== --}}
+
     <div class="card border-0 shadow-sm">
 
         <div class="card-body">
 
-
-            {{-- =========================
-                 PESAN BERHASIL
-            ========================== --}}
-            @if(session('success'))
-
-                <div class="alert alert-success alert-dismissible fade show">
-
-                    <i class="bi bi-check-circle me-2"></i>
-
-                    {{ session('success') }}
-
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                    ></button>
-
-                </div>
-
-            @endif
-
-
-
-            {{-- =========================
-                 SEARCH
-            ========================== --}}
-            {{-- <form
-                action="{{ route('admin.guru.index') }}"
-                method="GET"
-                class="mb-4"
-            >
-
-                <div class="row g-2">
-
-                    <div class="col-md-5">
-
-                        <input
-                            type="text"
-                            name="keyword"
-                            class="form-control"
-                            placeholder="Cari nama, NIP, atau mata pelajaran..."
-                            value="{{ $keyword ?? '' }}"
-                        >
-
-                    </div>
-
-
-                    <div class="col-md-auto">
-
-                        <button
-                            type="submit"
-                            class="btn btn-secondary"
-                        >
-
-                            <i class="bi bi-search me-1"></i>
-
-                            Cari
-
-                        </button>
-
-
-                        <a
-                            href="{{ route('admin.guru.index') }}"
-                            class="btn btn-light"
-                        >
-
-                            Reset
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </form> --}}
-
-
-
-            {{-- =========================
-                 INFO OPERATOR
-            ========================== --}}
             @auth
 
                 @if(Auth::user()->role === 'Operator')
@@ -176,9 +92,7 @@
                 </div>
             @endif
 
-            {{-- =========================
-                 TABEL
-            ========================== --}}
+
             <div class="table-responsive">
 
                 <table class="table table-hover align-middle">
@@ -232,11 +146,6 @@
                         @forelse($gurus as $guru)
 
                         <tr>
-
-
-                            {{-- =====================
-                                 NO
-                            ====================== --}}
                             <td>
 
                                 {{ $loop->iteration }}
@@ -244,10 +153,6 @@
                             </td>
 
 
-
-                            {{-- =====================
-                                 FOTO
-                            ====================== --}}
                             <td>
 
                                 @if($guru->foto)
@@ -274,10 +179,6 @@
                             </td>
 
 
-
-                            {{-- =====================
-                                 NAMA
-                            ====================== --}}
                             <td>
 
                                 <strong>
@@ -286,11 +187,6 @@
 
                             </td>
 
-
-
-                            {{-- =====================
-                                 NIP
-                            ====================== --}}
                             <td>
 
                                 {{ $guru->nip }}
@@ -299,20 +195,12 @@
 
 
 
-                            {{-- =====================
-                                 MAPEL
-                            ====================== --}}
                             <td>
 
                                 {{ $guru->mapel }}
 
                             </td>
 
-
-
-                            {{-- =====================
-                                 AKSI ADMIN
-                            ====================== --}}
                             @auth
 
                                 @if(Auth::user()->role === 'Admin')
@@ -375,10 +263,6 @@
 
                         @empty
 
-
-                        {{-- =====================
-                             DATA KOSONG
-                        ====================== --}}
                         <tr>
 
                             <td
@@ -412,7 +296,7 @@
 
             </div>
 
-        </div>
+        </d>
 
     </div>
 

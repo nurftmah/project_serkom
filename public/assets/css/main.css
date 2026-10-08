@@ -51,26 +51,25 @@
    2. Design System Variables
 --------------------------------------------------------------------- */
 :root {
-    /* Colors */
-    --bs-body-bg: #F4F6F5; /* Canvas background: light, warm grayish-green */
+    --bs-body-bg: #F4F6F5;
     --bs-body-font-family: 'Plus Jakarta Sans', sans-serif;
 
-    --brand-forest-dark: #1297ac;     /* Core sidebar/brand background */
-    --brand-forest-medium: #025480;   /* Alert banner / dark card BG */
-    --brand-forest-light: #1A3E30;    /* Interactive elements in dark mode */
-    --brand-lime: #006195;            /* Lime-yellow accent highlight */
-    --brand-lime-hover: #025480;
-    --brand-lime-translucent: rgba(180, 241, 5, 0.15);
+    --brand-forest-dark: #84A282;
+    --brand-forest-medium: #025480;
+    --brand-forest-light: #1A3E30;
 
-    --text-main: #0B130F;             /* Dark headers, main labels */
-    --text-muted-green: #6C7E75;      /* Secondary labels, muted details */
-    --text-sidebar-muted: #FFFFFF;    /* Sidebar inactive link labels */
+    --brand-lime: #589354;
+    --brand-lime-hover: #477C4A;
+    --brand-lime-translucent: rgba(88, 147, 84, 0.15);
+
+    --text-main: #0B130F;
+    --text-muted-green: #6C7E75;
+    --text-sidebar-muted: #FFFFFF;
 
     --card-background: #FFFFFF;
     --border-light: #E9EFEF;
     --border-dark-green: rgba(255, 255, 255, 0.1);
 
-    /* System Colors */
     --sys-green: #22C55E;
     --sys-green-bg: #DCFCE7;
     --sys-red: #EF4444;
@@ -78,18 +77,15 @@
     --sys-orange: #F97316;
     --sys-orange-bg: #FFEDD5;
 
-    /* Layout Configurations */
     --sidebar-width: 280px;
     --navbar-height: 80px;
 
-    /* Border Radii */
     --radius-xxl: 24px;
     --radius-xl: 18px;
     --radius-lg: 14px;
     --radius-md: 10px;
     --radius-sm: 6px;
 
-    /* Box Shadows */
     --shadow-sm: 0 2px 8px rgba(11, 19, 15, 0.02);
     --shadow-md: 0 10px 30px rgba(11, 19, 15, 0.04);
     --shadow-lg: 0 20px 50px rgba(11, 19, 15, 0.08);
@@ -339,6 +335,15 @@ a:hover {
     font-weight: 600;
 }
 
+.sidebar-menu-link.active {
+    background-color: var(--brand-lime) !important;
+    color: #FFFFFF !important;
+}
+
+.sidebar-menu-link.active i {
+    color: #FFFFFF !important;
+}
+
 /* Vertical indicator border on left edge */
 .sidebar-menu-link.active::before {
     content: '';
@@ -411,7 +416,7 @@ a:hover {
     width: 38px;
     height: 38px;
     background: #e3f6fa;
-    color: #1595a8;
+    color: #84A282 ;
     border-radius: 50%;
 
     display: flex;
@@ -1693,6 +1698,9 @@ span.flatpickr-weekday {
 /* ---------------------------------------------------------------------
    16. Footer Component Styles
 --------------------------------------------------------------------- */
+.bg-footer{
+    background-color:  #84A282;
+}
 
 .footer-custom {
     width: 100%;
@@ -3196,24 +3204,19 @@ span.flatpickr-weekday {
     }
 
 
-    .btn-primary {
-
-        background: #1595a8;
-
-        border-color: #1595a8;
-
+    .btn-green {
+        background: #84A282 ;
+        border-color:  #84A282 ;
         border-radius: 8px;
-
         padding: 9px 18px;
-
     }
 
 
-    .btn-primary:hover {
+    .btn-green:hover {
 
-        background: #117f90;
+        background: #84A282 ;
 
-        border-color: #117f90;
+        border-color: #84A282 ;
 
     }
 
@@ -3637,7 +3640,7 @@ span.flatpickr-weekday {
 ========================================================= */
 
 .dashboard-welcome {
-    background: linear-gradient(135deg, #0f6b78, #1597a8);
+    background: linear-gradient(135deg,  #84A282 , #77b273 );
     border-radius: 18px;
     padding: 28px 30px;
     color: white;
@@ -3709,7 +3712,7 @@ span.flatpickr-weekday {
     align-items: center;
     justify-content: center;
     background: #e8f7fa;
-    color: #1597a8;
+    color: #84A282 ;
     font-size: 20px;
 }
 
@@ -3766,7 +3769,7 @@ span.flatpickr-weekday {
 
 .school-card-link {
     font-size: 12px;
-    color: #1597a8;
+    color: #84A282 ;
     text-decoration: none;
     font-weight: 600;
 }
@@ -3799,7 +3802,7 @@ span.flatpickr-weekday {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1597a8;
+    color: #84A282 ;
     font-size: 20px;
     flex-shrink: 0;
 }
@@ -4156,6 +4159,147 @@ span.flatpickr-weekday {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+ /* INFO CARD */
+    .operator-info-card {
+        background: #ffffff;
+        border-radius: 15px;
+        padding: 20px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 15px;
+
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+
+    /* ICON */
+    .operator-icon {
+        width: 50px;
+        height: 50px;
+
+        border-radius: 12px;
+
+        background: #e3f6fa;
+        color: #1595a8;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 22px;
+    }
+
+
+    /* LABEL */
+    .operator-label {
+        color: #7b8794;
+        font-size: 13px;
+
+        margin-bottom: 3px;
+    }
+
+
+    /* NUMBER */
+    .operator-number {
+        font-size: 25px;
+        font-weight: 700;
+
+        color: #1f2937;
+    }
+
+
+    /* CARD */
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+
+    /* TABLE */
+    .table th {
+        font-size: 13px;
+        font-weight: 600;
+
+        color: #566573;
+
+        white-space: nowrap;
+    }
+
+
+    .table td {
+        font-size: 14px;
+
+        color: #34495e;
+    }
+
+
+    /* BUTTON */
+    .btn-primary {
+        background: #1595a8;
+        border-color: #1595a8;
+
+        border-radius: 8px;
+
+        padding: 9px 16px;
+    }
+
+
+    .btn-primary:hover {
+        background: #117f90;
+        border-color: #117f90;
+    }
+
+    .card {
+        border-radius: 15px;
+    }
+
+
+    .form-label {
+        font-weight: 600;
+        color: #34495e;
+    }
+
+
+    .form-control,
+    .form-select {
+        border-radius: 8px;
+        padding: 10px 13px;
+    }
+
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #1595a8;
+        box-shadow: 0 0 0 0.2rem rgba(21, 149, 168, 0.15);
+    }
+
+    .user-info-icon {
+        width: 70px;
+        height: 70px;
+
+        border-radius: 50%;
+
+        background: #e3f6fa;
+        color: #1595a8;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 30px;
+    }
+
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 10px 0;
+    }
 
 /* RESPONSIVE */
 

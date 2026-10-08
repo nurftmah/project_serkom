@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ektrakurikulers', function (Blueprint $table) {
             $table->id('id_ekskul');
             $table->string('nama_ekskul', 40);
+            $table->string('slug', 100)->unique();
             $table->string('pembina', 40);
             $table->string('jadwal_latihan', 40);
             $table->text('deskripsi');

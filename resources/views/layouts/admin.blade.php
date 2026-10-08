@@ -6,9 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MTS AL-AZHAR | @yield('title')</title>
+    <title>{{ $profil->nama_sekolah ?? 'MTS AL-AZHAR' }} | @yield('title')</title>
 
-    <link rel="icon" type="image/png" href="{{ asset('assets/images/logo_mts.png') }}">
+    <link rel="icon"
+          type="image/png"
+          href="{{ $profil?->logo
+              ? asset('uploads/profil/' . $profil->logo)
+              : asset('assets/images/logo_mts.png') }}">
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}">
@@ -309,14 +313,6 @@
 
             <!-- NAVBAR KANAN (Posisi Admin & Notifikasi) -->
             <div class="navbar-actions">
-
-                <!-- Notifikasi -->
-                <button
-                    class="navbar-action-btn"
-                    type="button"
-                    title="Notifikasi">
-                    <i class="bi bi-bell"></i>
-                </button>
 
 
                 <!-- Admin / Profil -->
