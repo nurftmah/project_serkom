@@ -120,14 +120,26 @@
 
                 </div>
 
+                {{-- KELAS --}}
+                <div class="mb-3">
+                    <label for="kelas" class="form-label">Kelas</label>
+                    <select name="kelas" id="kelas" class="form-select" required>
+                        <option value="">Pilih Kelas</option>
+                        <option value="VII A">VII A</option>
+                        <option value="VII B">VII B</option>
+                        <option value="VIII A">VIII A</option>
+                        <option value="VIII B">VIII B</option>
+                        <option value="IX A">IX A</option>
+                        <option value="IX B">IX B</option>
+                    </select>
+                </div>
+
 
                 {{-- TAHUN MASUK --}}
                 <div class="mb-3">
-
                     <label class="form-label">
                         Tahun Masuk
                     </label>
-
                     <input
                         type="number"
                         name="tahun_masuk"
@@ -138,9 +150,7 @@
                         max="2100"
                         required
                     >
-
                 </div>
-
 
                 {{-- BUTTON --}}
                 <div class="mt-4">
@@ -159,11 +169,8 @@
                         Simpan Data
 
                     </button>
-
                 </div>
-
             </form>
-
         </div>
 
     </div>

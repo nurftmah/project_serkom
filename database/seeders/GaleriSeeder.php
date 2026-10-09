@@ -14,7 +14,7 @@ class GaleriSeeder extends Seeder
                 'id_galeri' => 1,
                 'judul' => 'Kegiatan Upacara Sekolah',
                 'keterangan' => 'Kegiatan upacara rutin yang dilaksanakan oleh seluruh warga sekolah.',
-                'file' => '',
+                'file' => 'upacara.jfif',
                 'kategori' => 'Foto',
                 'tanggal' => '2026-08-17',
             ],
@@ -22,7 +22,7 @@ class GaleriSeeder extends Seeder
                 'id_galeri' => 2,
                 'judul' => 'Kegiatan Ekstrakurikuler',
                 'keterangan' => 'Dokumentasi kegiatan ekstrakurikuler siswa MTS AL-AZHAR.',
-                'file' => '',
+                'file' => 'kegiatan.jfif',
                 'kategori' => 'Foto',
                 'tanggal' => '2026-08-20',
             ]

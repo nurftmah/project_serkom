@@ -15,7 +15,7 @@ class PrestasiSeeder extends Seeder
                 'nama_prestasi' => 'Juara 1 Lomba Cerdas Cermat',
                 'slug' => 'juara-1-lomba-cerdas-cermat',
                 'deskripsi' => 'Meraih juara pertama dalam perlombaan cerdas cermat tingkat kecamatan.',
-                'foto' => '',
+                'foto' => 'lcc.jpeg',
                 'tahun_ajaran' => '2025',
             ],
             [
@@ -23,7 +23,7 @@ class PrestasiSeeder extends Seeder
                 'nama_prestasi' => 'Juara 2 Futsal',
                 'slug' => 'juara-2-futsal',
                 'deskripsi' => 'Meraih juara kedua dalam kompetisi futsal antar sekolah.',
-                'foto' => '',
+                'foto' => 'futsal.jpg',
                 'tahun_ajaran' => '2026',
             ],
         ]);

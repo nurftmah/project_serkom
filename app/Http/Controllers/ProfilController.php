@@ -1,32 +1,23 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Profil;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 class ProfilController extends Controller
 {
     public function index()
     {
         $profil = Profil::first();
-
         return view('admin.profil.index', compact('profil'));
     }
-
     public function edit()
     {
         $profil = Profil::first();
-
         if (!$profil) {
-            return redirect()
-                ->route('admin.profil.index')
-                ->with('error', 'Data profil sekolah belum tersedia.');
+            return redirect()->route('admin.profil.index')->with('error', 'Data profil sekolah belum tersedia.');
         }
-
         return view('admin.profil.edit', compact('profil'));
     }
-
     public function update(Request $request)
     {
         $request->validate([
@@ -42,13 +33,10 @@ class ProfilController extends Controller
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
-
         $profil = Profil::first();
-
         if (!$profil) {
             $profil = new Profil();
         }
-
         $profil->nama_sekolah = $request->nama_sekolah;
         $profil->kepala_sekolah = $request->kepala_sekolah;
         $profil->npsn = $request->npsn;
@@ -58,41 +46,19 @@ class ProfilController extends Controller
         $profil->misi = $request->misi;
         $profil->tahun_berdiri = $request->tahun_berdiri;
         $profil->deskripsi = $request->deskripsi;
-
-        $folder = public_path('uploads/profil');
-
-        if (!file_exists($folder)) {
-            mkdir($folder, 0777, true);
-        }
-
         if ($request->hasFile('foto')) {
-            if ($profil->foto && file_exists($folder . '/' . $profil->foto)) {
-                unlink($folder . '/' . $profil->foto);
+            if ($profil->foto) {
+                Storage::disk('public')->delete('profil/' . $profil->foto);
             }
-
-            $foto = $request->file('foto');
-            $namaFoto = time() . '_foto.' . $foto->extension();
-            $foto->move($folder, $namaFoto);
-
-            $profil->foto = $namaFoto;
+            $profil->foto = basename($request->file('foto')->store('profil', 'public'));
         }
-
         if ($request->hasFile('logo')) {
-            if ($profil->logo && file_exists($folder . '/' . $profil->logo)) {
-                unlink($folder . '/' . $profil->logo);
+            if ($profil->logo) {
+                Storage::disk('public')->delete('profil/' . $profil->logo);
             }
-
-            $logo = $request->file('logo');
-            $namaLogo = time() . '_logo.' . $logo->extension();
-            $logo->move($folder, $namaLogo);
-
-            $profil->logo = $namaLogo;
+            $profil->logo = basename($request->file('logo')->store('profil', 'public'));
         }
-
         $profil->save();
-
-        return redirect()
-            ->route('admin.profil.index')
-            ->with('success', 'Profil sekolah berhasil diperbarui.');
+        return redirect()->route('admin.profil.index')->with('success', 'Profil sekolah berhasil diperbarui.');
     }
 }

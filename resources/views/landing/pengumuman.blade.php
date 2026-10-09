@@ -16,7 +16,7 @@
 
         <div class="row g-3 align-items-stretch">
             @forelse($pengumumen->take(3) as $pengumuman)
-                <div class="col-md-4 d-flex" data-aos="fade-up" data-aos-delay="{{ $loop->index * 150 }}">
+                <div class="col-md-4 d-flex">
                     <a href="{{ route('landing.pengumuman.show', ['id' => Crypt::encryptString((string) $pengumuman->id_pengumuman)]) }}" class="text-decoration-none d-flex w-100">
                         <div class="card rounded-4 shadow-sm overflow-hidden border-0 w-100 d-flex flex-column">
                             <div class="pengumuman-header bg-gradient-sekolah">
@@ -54,7 +54,7 @@
         </div>
 
         <div class="mt-4">
-            <a href="{{ route('home') }}" class="btn btn-outline-primary rounded-3 px-4">
+            <a href="{{ route('home') }}" class="btn btn-outline-success rounded-3 px-4">
                 <i class="bi bi-arrow-left me-2"></i>
                 Kembali ke Beranda
             </a>

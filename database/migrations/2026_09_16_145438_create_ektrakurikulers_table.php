@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id('id_ekskul');
             $table->string('nama_ekskul', 40);
             $table->string('slug', 100)->unique();
-            $table->string('pembina', 40);
+            // $table->string('pembina', 40);
+            $table->foreignId('id_guru') ->nullable() ->constrained('gurus', 'id_guru') ->nullOnDelete() ->cascadeOnUpdate();
             $table->string('jadwal_latihan', 40);
             $table->text('deskripsi');
             $table->string('gambar', 100);

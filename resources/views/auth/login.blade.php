@@ -60,7 +60,7 @@
                 >
             </div>
 
-            <span class="fw-semibold">
+            <span class="fw-semibold text-success">
                 {{ $profil?->nama_sekolah ?? 'MTS AL-AZHAR' }}
             </span>
 

@@ -6,18 +6,15 @@ use App\Models\Galeri;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class GaleriController extends Controller
 {
     public function index()
     {
-        $galeris = Galeri::orderBy('tanggal', 'desc')
-            ->get();
+        $galeris = Galeri::orderBy('tanggal', 'desc')->get();
 
-        return view(
-            'admin.galeri.index',
-            compact('galeris')
-        );
+        return view('admin.galeri.index', compact('galeris'));
     }
 
     public function create()
@@ -38,17 +35,9 @@ class GaleriController extends Controller
         $namaFile = null;
 
         if ($request->hasFile('file')) {
-            $file = $request->file('file');
-
-            $namaFile = time() . '_' . $file->getClientOriginalName();
-
-            $folder = public_path('uploads/galeri');
-
-            if (!file_exists($folder)) {
-                mkdir($folder, 0777, true);
-            }
-
-            $file->move($folder, $namaFile);
+            $namaFile = basename(
+                $request->file('file')->store('galeri', 'public')
+            );
         }
 
         Galeri::create([
@@ -78,7 +67,6 @@ class GaleriController extends Controller
             }
 
             return view('admin.galeri.edit', compact('galeri'));
-
         } catch (DecryptException $e) {
             return redirect()
                 ->route('admin.galeri.index')
@@ -110,28 +98,15 @@ class GaleriController extends Controller
             $namaFile = $galeri->file;
 
             if ($request->hasFile('file')) {
-                if (
-                    $galeri->file &&
-                    file_exists(
-                        public_path('uploads/galeri/' . $galeri->file)
-                    )
-                ) {
-                    unlink(
-                        public_path('uploads/galeri/' . $galeri->file)
-                    );
+                $fileBaru = basename(
+                    $request->file('file')->store('galeri', 'public')
+                );
+
+                if ($galeri->file) {
+                    Storage::disk('public')->delete('galeri/' . $galeri->file);
                 }
 
-                $file = $request->file('file');
-
-                $namaFile = time() . '_' . $file->getClientOriginalName();
-
-                $folder = public_path('uploads/galeri');
-
-                if (!file_exists($folder)) {
-                    mkdir($folder, 0777, true);
-                }
-
-                $file->move($folder, $namaFile);
+                $namaFile = $fileBaru;
             }
 
             $galeri->update([
@@ -145,7 +120,6 @@ class GaleriController extends Controller
             return redirect()
                 ->route('admin.galeri.index')
                 ->with('success', 'Data galeri berhasil diperbarui.');
-
         } catch (DecryptException $e) {
             return redirect()
                 ->route('admin.galeri.index')
@@ -166,15 +140,8 @@ class GaleriController extends Controller
                     ->with('error', 'Data galeri tidak ditemukan.');
             }
 
-            if (
-                $galeri->file &&
-                file_exists(
-                    public_path('uploads/galeri/' . $galeri->file)
-                )
-            ) {
-                unlink(
-                    public_path('uploads/galeri/' . $galeri->file)
-                );
+            if ($galeri->file) {
+                Storage::disk('public')->delete('galeri/' . $galeri->file);
             }
 
             $galeri->delete();
@@ -182,7 +149,6 @@ class GaleriController extends Controller
             return redirect()
                 ->route('admin.galeri.index')
                 ->with('success', 'Data galeri berhasil dihapus.');
-
         } catch (DecryptException $e) {
             return redirect()
                 ->route('admin.galeri.index')

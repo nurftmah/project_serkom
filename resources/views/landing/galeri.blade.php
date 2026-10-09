@@ -13,7 +13,6 @@
             <h2 class="fw-bold text-dark mb-2">Galeri Sekolah</h2>
             <p class="text-muted mb-0">Dokumentasi kegiatan dan aktivitas MTS AL-AZHAR</p>
         </div>
-
         <div class="row g-4">
             @forelse($galeris as $galeri)
                 <div class="col-md-6 col-lg-4">
@@ -21,14 +20,20 @@
                         <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
                             @if($galeri->file)
                                 <div class="ratio ratio-16x9">
-                                    <img src="{{ asset('uploads/galeri/' . $galeri->file) }}" alt="{{ $galeri->judul }}" class="w-100 h-100 object-fit-cover">
+                                    @if($galeri->kategori == 'Foto')
+                                        <img src="{{ asset('storage/galeri/' . $galeri->file) }}" alt="{{ $galeri->judul }}" class="w-100 h-100 object-fit-cover">
+                                    @elseif($galeri->kategori == 'Video')
+                                        <video class="w-100 h-100 object-fit-cover" controls>
+                                            <source src="{{ asset('storage/galeri/' . $galeri->file) }}">
+                                            Browser kamu tidak mendukung video.
+                                        </video>
+                                    @endif
                                 </div>
                             @else
                                 <div class="ratio ratio-16x9 bg-gradient-sekolah d-flex align-items-center justify-content-center">
                                     <i class="bi bi-images text-white display-4"></i>
                                 </div>
                             @endif
-
                             <div class="card-body p-4 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <span class="badge bg-gradient-sekolah rounded-pill px-3 py-2">
@@ -40,9 +45,9 @@
                                         {{ \Carbon\Carbon::parse($galeri->tanggal)->format('d M Y') }}
                                     </small>
                                 </div>
-
                                 <h5 class="fw-bold text-dark mb-2">{{ $galeri->judul }}</h5>
                                 <p class="text-muted mb-0">
+                                    {{-- fungsi untuk membatasi teks,batasnya adlh 120 --}}
                                     {{ \Illuminate\Support\Str::limit($galeri->keterangan, 120) }}
                                 </p>
                             </div>
@@ -58,9 +63,8 @@
                 </div>
             @endforelse
         </div>
-
         <div class="mt-4">
-            <a href="{{ url('/') }}" class="btn btn-outline-primary rounded-3 px-4">
+            <a href="{{ url('/') }}" class="btn btn-outline-success rounded-3 px-4">
                 <i class="bi bi-arrow-left me-2"></i>
                 Kembali ke Beranda
             </a>

@@ -47,6 +47,7 @@ class LandingController extends Controller
         $jumlahSiswa = Siswa::count();
         $jumlahGuru = Guru::count();
         $jumlahEkstrakurikuler = Ektrakurikuler::count();
+        $jumlahPrestasi = Prestasi::count();
 
         return view('landing.index', compact(
             'beritas',
@@ -58,7 +59,8 @@ class LandingController extends Controller
             'pengumumen',
             'jumlahSiswa',
             'jumlahGuru',
-            'jumlahEkstrakurikuler'
+            'jumlahEkstrakurikuler',
+            'jumlahPrestasi'
         ));
     }
 

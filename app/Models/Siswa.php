@@ -14,6 +14,7 @@ class Siswa extends Model
         'nisn',
         'nama_siswa',
         'jenis_kelamin',
+        'kelas',
         'tahun_masuk',
     ];
 }

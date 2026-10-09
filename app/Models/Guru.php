@@ -20,4 +20,9 @@ class Guru extends Model
         'mapel',
         'foto'
     ];
+
+    public function ekstrakurikulers()
+    {
+        return $this->hasMany(Ektrakurikuler::class, 'id_guru', 'id_guru');
+    }
 }

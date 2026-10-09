@@ -117,6 +117,22 @@
 
                 </div>
 
+            
+                {{-- KELAS --}}
+                <div class="mb-3">
+                    <label for="kelas" class="form-label">Kelas</label>
+                    <select name="kelas" id="kelas" class="form-select" required>
+                        <option value="">Pilih Kelas</option>
+                        <option value="VII A" {{ old('kelas', $siswa->kelas) == 'VII A' ? 'selected' : '' }}>VII A</option>
+                        <option value="VII B" {{ old('kelas', $siswa->kelas) == 'VII B' ? 'selected' : '' }}>VII B</option>
+                        <option value="VIII A" {{ old('kelas', $siswa->kelas) == 'VIII A' ? 'selected' : '' }}>VIII A</option>
+                        <option value="VIII B" {{ old('kelas', $siswa->kelas) == 'VIII B' ? 'selected' : '' }}>VIII B</option>
+                        <option value="IX A" {{ old('kelas', $siswa->kelas) == 'IX A' ? 'selected' : '' }}>IX A</option>
+                        <option value="IX B" {{ old('kelas', $siswa->kelas) == 'IX B' ? 'selected' : '' }}>IX B</option>
+                    </select>
+                </div>
+
+
 
                 {{-- TAHUN MASUK --}}
                 <div class="mb-3">

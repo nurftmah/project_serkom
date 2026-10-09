@@ -15,9 +15,15 @@ class Ektrakurikuler extends Model
 
     protected $fillable = [
         'nama_ekskul',
-        'pembina',
+        'id_guru',
+        'slug',
         'jadwal_latihan',
         'deskripsi',
         'gambar',
     ];
+
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'id_guru', 'id_guru');
+    }
 }

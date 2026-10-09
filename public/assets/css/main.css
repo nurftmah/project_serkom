@@ -4301,6 +4301,352 @@ span.flatpickr-weekday {
         padding: 10px 0;
     }
 
+    .prestasi-deskripsi {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
+}
+
+
+#tabelGuru {
+    width: 100% !important;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+#tabelGuru th,
+#tabelGuru td {
+    padding: 10px 12px !important;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+#tabelGuru th:nth-child(1),
+#tabelGuru td:nth-child(1) {
+    width: 5%;
+    text-align: center;
+}
+
+#tabelGuru th:nth-child(2),
+#tabelGuru td:nth-child(2) {
+    width: 9%;
+    text-align: center;
+}
+
+#tabelGuru th:nth-child(3),
+#tabelGuru td:nth-child(3) {
+    width: 24%;
+    text-align: left;
+}
+
+#tabelGuru th:nth-child(4),
+#tabelGuru td:nth-child(4) {
+    width: 20%;
+    text-align: left;
+}
+
+#tabelGuru th:nth-child(5),
+#tabelGuru td:nth-child(5) {
+    width: 24%;
+    text-align: left;
+}
+
+#tabelGuru th:nth-child(6),
+#tabelGuru td:nth-child(6) {
+    width: 18%;
+    text-align: center;
+}
+
+/* DASHBOARD */
+.school-dashboard {
+    width: 100%;
+    min-width: 0;
+}
+.school-dashboard .gallery-item img,
+.school-dashboard .gallery-item video {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+.dashboard-welcome {
+    padding: 30px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #3d4345, #7D9C65);
+    color: white;
+}
+.welcome-small {
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    opacity: 0.85;
+}
+.welcome-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.welcome-text {
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* KARTU JUMLAH DATA */
+.school-stat {
+    padding: 22px;
+    border-radius: 15px;
+    background: white;
+    border: 1px solid #eeeeee;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+.school-stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.school-stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #edf3e9;
+    color: #7D9C65;
+    font-size: 23px;
+}
+.school-stat-arrow {
+    color: #999;
+    font-size: 20px;
+}
+.school-stat-label {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+.school-stat-number {
+    color: #303030;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.school-stat-info {
+    color: #999;
+    font-size: 12px;
+}
+
+/* KARTU ISI DASHBOARD */
+.school-card {
+    width: 100%;
+    min-width: 0;
+    padding: 22px;
+    border-radius: 15px;
+    background: white;
+    border: 1px solid #eeeeee;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+}
+.school-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eeeeee;
+}
+.school-card-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #303030;
+}
+.school-card-link {
+    color: #7D9C65;
+    font-size: 13px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.school-card-link:hover {
+    color: #536f43;
+}
+
+/* BERITA TERBARU */
+.news-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+.news-item:last-child {
+    border-bottom: none;
+}
+.news-image {
+    width: 85px;
+    height: 70px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #edf3e9;
+    color: #7D9C65;
+    font-size: 25px;
+}
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.news-content {
+    min-width: 0;
+    flex: 1;
+}
+.news-title {
+    color: #303030;
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+.news-date {
+    color: #999;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+/* PENGUMUMAN */
+.announcement-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+.announcement-item:last-child {
+    border-bottom: none;
+}
+.announcement-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #edf3e9;
+    color: #7D9C65;
+    font-size: 19px;
+}
+.announcement-title {
+    color: #303030;
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+.announcement-date {
+    color: #999;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+/* PRESTASI */
+.prestasi-deskripsi {
+    overflow-wrap: anywhere;
+    line-height: 1.6;
+}
+
+/* GALERI */
+.school-dashboard .gallery-box {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+    width: 100%;
+    min-width: 0;
+}
+.school-dashboard .gallery-item {
+    width: 100%;
+    height: 150px;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f1f3f5;
+}
+.school-dashboard .gallery-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.school-dashboard .gallery-empty {
+    grid-column: 1 / -1;
+    padding: 30px;
+    text-align: center;
+    color: #888;
+}
+.school-dashboard .gallery-empty i {
+    display: block;
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+/* DATA KOSONG */
+.empty-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 15px;
+    color: #999;
+    text-align: center;
+    gap: 10px;
+}
+.empty-data i {
+    font-size: 32px;
+    color: #7D9C65;
+}
+
+/* TAMPILAN TABLET */
+@media (max-width: 992px) {
+    .school-dashboard .gallery-box {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* TAMPILAN HP */
+@media (max-width: 576px) {
+    .dashboard-welcome {
+        padding: 22px;
+    }
+    .welcome-title {
+        font-size: 22px;
+    }
+    .school-card {
+        padding: 16px;
+    }
+    .school-card-title {
+        font-size: 16px;
+    }
+    .school-dashboard .gallery-box {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+    .school-dashboard .gallery-item {
+        height: 120px;
+    }
+    .news-image {
+        width: 70px;
+        height: 60px;
+    }
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 1200px) {
