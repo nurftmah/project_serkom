@@ -25,7 +25,7 @@
                 <div class="card-body p-4 p-lg-5">
                     <div class="text-center mb-4">
                         <h3 class="fw-bold text-dark mb-2">{{ $guru->nama_guru }}</h3>
-                        <span class="badge bg-light text-primary border rounded-pill px-3 py-2">
+                        <span class="badge bg-light text-success border rounded-pill px-3 py-2">
                             <i class="bi bi-person-workspace me-1"></i>
                             Guru Mata Pelajaran
                         </span>

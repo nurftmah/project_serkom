@@ -15,7 +15,7 @@
             @forelse($beritas as $berita)
                 <div class="col-md-6 col-lg-4">
                     <a href="{{ route('landing.berita.show', ['slug' => $berita->slug]) }}" class="text-decoration-none d-block h-100">
-                        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100 berita-card">
+                        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
                             @if($berita->gambar && \Illuminate\Support\Facades\Storage::disk('public')->exists('berita/' . $berita->gambar))
                                 <img src="{{ asset('storage/berita/' . $berita->gambar) }}" class="w-100" style="height:220px; object-fit:cover;" alt="{{ $berita->judul }}">
                             @else

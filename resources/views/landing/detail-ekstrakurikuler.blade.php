@@ -25,7 +25,7 @@
                     <div class="col-md-6">
                         <div class="bg-light rounded-3 p-3 h-100 d-flex align-items-center">
                             <div class="bg-white rounded-3 p-3 me-3">
-                                <i class="bi bi-person-fill text-gradient-sekolah fs-4"></i>
+                                <i class="bi bi-person-fill text-success fs-4"></i>
                             </div>
                             <div>
                                 <small class="text-muted d-block mb-1">Pembina</small>
@@ -36,7 +36,7 @@
                     <div class="col-md-6">
                         <div class="bg-light rounded-3 p-3 h-100 d-flex align-items-center">
                             <div class="bg-white rounded-3 p-3 me-3">
-                                <i class="bi bi-calendar3 text-gradient-sekolah fs-4"></i>
+                                <i class="bi bi-calendar3 text-success fs-4"></i>
                             </div>
                             <div>
                                 <small class="text-muted d-block mb-1">Jadwal Latihan</small>
@@ -48,7 +48,7 @@
                 <hr class="mb-4">
                 <div>
                     <h5 class="fw-bold text-dark mb-3">
-                        <i class="bi bi-info-circle-fill text-gradient-sekolah me-2"></i>
+                        <i class="bi bi-info-circle-fill text-success me-2"></i>
                         Tentang Ekstrakurikuler
                     </h5>
                     <div class="text-muted lh-lg">

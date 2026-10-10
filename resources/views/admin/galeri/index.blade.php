@@ -69,7 +69,7 @@
                                         <a href="{{ route('admin.galeri.edit', ['id' => Crypt::encryptString((string) $galeri->id_galeri)]) }}" class="btn btn-warning btn-sm">
                                             <i class="bi bi-pencil me-1"></i>
                                         </a>
-                                        <form action="{{ route('admin.galeri.destroy', ['id' => Crypt::encryptString((string) $galeri->id_galeri)]) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                        <form action="{{ route('admin.galeri.destroy', ['id' => Crypt::encryptString((string) $galeri->id_galeri)]) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus galeri ini?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">

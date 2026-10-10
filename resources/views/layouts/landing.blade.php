@@ -89,19 +89,19 @@
                         <a href="{{ route('landing.tentang') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.tentang') ? 'active' : '' }}">Tentang</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('landing.guru') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.guru') ? 'active' : '' }}">Guru &amp; Staff</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('landing.ekstrakurikuler') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.ekstrakurikuler') ? 'active' : '' }}">Ekstrakurikuler</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('landing.prestasi') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.prestasi*') ? 'active' : '' }}">Prestasi</a>
+                        <a href="{{ route('landing.guru') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.guru') ? 'active' : '' }}">Guru & Staff</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('landing.berita') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.berita*') ? 'active' : '' }}">Berita</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('landing.pengumuman') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.pengumuman*') ? 'active' : '' }}">Pengumuman</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('landing.ekstrakurikuler') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.ekstrakurikuler') ? 'active' : '' }}">Ekstrakurikuler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('landing.prestasi') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.prestasi*') ? 'active' : '' }}">Prestasi</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('landing.galeri') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.galeri*') ? 'active' : '' }}">Galeri</a>

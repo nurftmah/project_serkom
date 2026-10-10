@@ -32,7 +32,7 @@
                     <li class="sidebar-menu-item">
                         <a href="{{ route('admin.dashboard') }}" class="sidebar-menu-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                             <i class="bi bi-house-door-fill"></i>
-                            <span>Dashboard</span>
+                            <span>Beranda</span>
                         </a>
                     </li>
                     @auth
@@ -40,7 +40,7 @@
                             <li class="sidebar-menu-item">
                                 <a href="{{ route('admin.user.index') }}" class="sidebar-menu-link {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
                                     <i class="bi bi-person-gear"></i>
-                                    <span>User</span>
+                                    <span>Pengguna</span>
                                 </a>
                             </li>
                         @endif
@@ -86,12 +86,6 @@
                         </a>
                     </li>
                     <li class="sidebar-menu-item">
-                        <a href="{{ route('admin.galeri.index') }}" class="sidebar-menu-link {{ request()->routeIs('admin.galeri.*') ? 'active' : '' }}">
-                            <i class="bi bi-images"></i>
-                            <span>Kelola Galeri</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-menu-item">
                         <a href="{{ route('admin.pengumuman.index') }}" class="sidebar-menu-link {{ request()->routeIs('admin.pengumuman.*') ? 'active' : '' }}">
                             <i class="bi bi-megaphone-fill"></i>
                             <span>Kelola Pengumuman</span>
@@ -101,6 +95,12 @@
                         <a href="{{ route('admin.prestasi.index') }}" class="sidebar-menu-link {{ request()->routeIs('admin.prestasi.*') ? 'active' : '' }}">
                             <i class="bi bi-award-fill"></i>
                             <span>Kelola Prestasi</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="{{ route('admin.galeri.index') }}" class="sidebar-menu-link {{ request()->routeIs('admin.galeri.*') ? 'active' : '' }}">
+                            <i class="bi bi-images"></i>
+                            <span>Kelola Galeri</span>
                         </a>
                     </li>
                 </ul>

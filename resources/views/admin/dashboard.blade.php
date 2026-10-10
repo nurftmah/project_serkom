@@ -4,7 +4,7 @@
 <div class="school-dashboard">
     <div class="dashboard-welcome">
         <div class="welcome-content">
-            <div class="welcome-small">SISTEM INFORMASI SEKOLAH</div>
+            <div class="welcome-small">SchoolHub</div>
             <h1 class="welcome-title">
                 Selamat Datang,
                 @auth
