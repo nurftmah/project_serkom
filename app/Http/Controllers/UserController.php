@@ -12,19 +12,9 @@ class UserController extends Controller
     // =========================
     // MENAMPILKAN DATA USER
     // =========================
-    public function index(Request $request)
+    public function index()
     {
-        $keyword = $request->input('keyword');
-
-        // Gunakan query builder dengan grouping (function) agar pencarian orWhere tidak bocor
-        $users = User::when($keyword, function ($query) use ($keyword) {
-                    return $query->where(function ($q) use ($keyword) {
-                        $q->where('username', 'like', "%{$keyword}%")
-                        ->orWhere('role', 'like', "%{$keyword}%");
-                    });
-                })
-                ->latest()
-                ->get();
+        $users = User::latest()->get();
 
         $totalUser = User::count();
         $totalAdmin = User::where('role', 'Admin')->count();
@@ -34,8 +24,7 @@ class UserController extends Controller
             'users',
             'totalUser',
             'totalAdmin',
-            'totalOperator',
-            'keyword'
+            'totalOperator'
         ));
     }
 

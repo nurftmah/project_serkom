@@ -15,7 +15,7 @@
         </div>
 
         <div class="row g-3 align-items-stretch">
-            @forelse($pengumumen->take(3) as $pengumuman)
+            @forelse($pengumumen as $pengumuman)
                 <div class="col-md-4 d-flex">
                     <a href="{{ route('landing.pengumuman.show', ['id' => Crypt::encryptString((string) $pengumuman->id_pengumuman)]) }}" class="text-decoration-none d-flex w-100">
                         <div class="card rounded-4 shadow-sm overflow-hidden border-0 w-100 d-flex flex-column">

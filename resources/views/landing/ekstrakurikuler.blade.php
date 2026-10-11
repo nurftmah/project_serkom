@@ -13,7 +13,7 @@
         </div>
         @if($ekstrakurikulers->count())
             <div class="row g-3">
-                @foreach($ekstrakurikulers->take(3) as $ekskul)
+                @foreach($ekstrakurikulers as $ekskul)
                     <div class="col-md-4">
                         <a href="{{ route('landing.ekstrakurikuler.show', ['slug' => $ekskul->slug]) }}" class="text-decoration-none d-block h-100">
                             <div class="card h-100 rounded-4 shadow-sm overflow-hidden">

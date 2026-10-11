@@ -8,7 +8,7 @@
         $fotoGaleri = $galeris->where('kategori', 'Foto')->filter(function ($galeri) {
             return !empty($galeri->file)
                 && file_exists(storage_path('app/public/galeri/' . $galeri->file));
-        })->values();
+        })->take(3)->values();
     @endphp
 
     <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">

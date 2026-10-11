@@ -26,22 +26,20 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // ADMIN - WAJIB LOGIN
 Route::prefix('admin')->middleware('auth')->group(function () {
 
-    // Dashboard
+    // DASHBOARD
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-    // Profil Akun
+    // PROFIL AKUN
     Route::get('/profil-akun', [UserController::class, 'profile'])->name('admin.user.profil');
     Route::put('/profil-akun', [UserController::class, 'updateProfile'])->name('admin.user.profil.update');
 
-    // PROFIL SEKOLAH DAN PENGELOLA WEBSITE - KHUSUS ADMIN
+    // PROFIL SEKOLAH - ADMIN DAN OPERATOR
+    Route::get('/profil', [ProfilController::class, 'index'])->name('admin.profil.index');
+    Route::get('/profil/edit/{id}', [ProfilController::class, 'edit'])->name('admin.profil.edit');
+    Route::put('/profil/{id}', [ProfilController::class, 'update'])->name('admin.profil.update');
+
+    // PENGELOLA WEBSITE - KHUSUS ADMIN
     Route::middleware('admin')->group(function () {
-
-        // Profil Sekolah
-        Route::get('/profil', [ProfilController::class, 'index'])->name('admin.profil.index');
-        Route::get('/profil/edit/{id}', [ProfilController::class, 'edit'])->name('admin.profil.edit');
-        Route::put('/profil/{id}', [ProfilController::class, 'update'])->name('admin.profil.update');
-
-        // Pengelola Website
         Route::get('/user', [UserController::class, 'index'])->name('admin.user.index');
         Route::get('/user/create', [UserController::class, 'create'])->name('admin.user.create');
         Route::post('/user', [UserController::class, 'store'])->name('admin.user.store');
@@ -72,18 +70,15 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::delete('/siswa/{id}', [SiswaController::class, 'destroy'])->name('admin.siswa.destroy');
     });
 
-    // EKSTRAKURIKULER
+    // EKSTRAKURIKULER - ADMIN DAN OPERATOR
     Route::get('/ekstrakurikuler', [EktrakurikulerController::class, 'index'])->name('admin.ekstrakurikuler.index');
+    Route::get('/ekstrakurikuler/create', [EktrakurikulerController::class, 'create'])->name('admin.ekstrakurikuler.create');
+    Route::post('/ekstrakurikuler', [EktrakurikulerController::class, 'store'])->name('admin.ekstrakurikuler.store');
+    Route::get('/ekstrakurikuler/{id}/edit', [EktrakurikulerController::class, 'edit'])->name('admin.ekstrakurikuler.edit');
+    Route::put('/ekstrakurikuler/{id}', [EktrakurikulerController::class, 'update'])->name('admin.ekstrakurikuler.update');
+    Route::delete('/ekstrakurikuler/{id}', [EktrakurikulerController::class, 'destroy'])->name('admin.ekstrakurikuler.destroy');
 
-    Route::middleware('admin')->group(function () {
-        Route::get('/ekstrakurikuler/create', [EktrakurikulerController::class, 'create'])->name('admin.ekstrakurikuler.create');
-        Route::post('/ekstrakurikuler', [EktrakurikulerController::class, 'store'])->name('admin.ekstrakurikuler.store');
-        Route::get('/ekstrakurikuler/{id}/edit', [EktrakurikulerController::class, 'edit'])->name('admin.ekstrakurikuler.edit');
-        Route::put('/ekstrakurikuler/{id}', [EktrakurikulerController::class, 'update'])->name('admin.ekstrakurikuler.update');
-        Route::delete('/ekstrakurikuler/{id}', [EktrakurikulerController::class, 'destroy'])->name('admin.ekstrakurikuler.destroy');
-    });
-
-    // BERITA - ADMIN DAN OPERATOR YANG SUDAH LOGIN
+    // BERITA - ADMIN DAN OPERATOR
     Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita.index');
     Route::get('/berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
     Route::post('/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
@@ -91,38 +86,29 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/berita/{slug}', [BeritaController::class, 'update'])->name('admin.berita.update');
     Route::delete('/berita/{slug}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
 
-    // GALERI
+    // GALERI - ADMIN DAN OPERATOR
     Route::get('/galeri', [GaleriController::class, 'index'])->name('admin.galeri.index');
+    Route::get('/galeri/create', [GaleriController::class, 'create'])->name('admin.galeri.create');
+    Route::post('/galeri', [GaleriController::class, 'store'])->name('admin.galeri.store');
+    Route::get('/galeri/{id}/edit', [GaleriController::class, 'edit'])->name('admin.galeri.edit');
+    Route::put('/galeri/{id}', [GaleriController::class, 'update'])->name('admin.galeri.update');
+    Route::delete('/galeri/{id}', [GaleriController::class, 'destroy'])->name('admin.galeri.destroy');
 
-    Route::middleware('admin')->group(function () {
-        Route::get('/galeri/create', [GaleriController::class, 'create'])->name('admin.galeri.create');
-        Route::post('/galeri', [GaleriController::class, 'store'])->name('admin.galeri.store');
-        Route::get('/galeri/{id}/edit', [GaleriController::class, 'edit'])->name('admin.galeri.edit');
-        Route::put('/galeri/{id}', [GaleriController::class, 'update'])->name('admin.galeri.update');
-        Route::delete('/galeri/{id}', [GaleriController::class, 'destroy'])->name('admin.galeri.destroy');
-    });
-
-    // PENGUMUMAN
+    // PENGUMUMAN - ADMIN DAN OPERATOR
     Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('admin.pengumuman.index');
+    Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name('admin.pengumuman.create');
+    Route::post('/pengumuman', [PengumumanController::class, 'store'])->name('admin.pengumuman.store');
+    Route::get('/pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('admin.pengumuman.edit');
+    Route::put('/pengumuman/{id}', [PengumumanController::class, 'update'])->name('admin.pengumuman.update');
+    Route::delete('/pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('admin.pengumuman.destroy');
 
-    Route::middleware('admin')->group(function () {
-        Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name('admin.pengumuman.create');
-        Route::post('/pengumuman', [PengumumanController::class, 'store'])->name('admin.pengumuman.store');
-        Route::get('/pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('admin.pengumuman.edit');
-        Route::put('/pengumuman/{id}', [PengumumanController::class, 'update'])->name('admin.pengumuman.update');
-        Route::delete('/pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('admin.pengumuman.destroy');
-    });
-
-    // PRESTASI
+    // PRESTASI - ADMIN DAN OPERATOR
     Route::get('/prestasi', [PrestasiController::class, 'index'])->name('admin.prestasi.index');
-
-    Route::middleware('admin')->group(function () {
-        Route::get('/prestasi/create', [PrestasiController::class, 'create'])->name('admin.prestasi.create');
-        Route::post('/prestasi', [PrestasiController::class, 'store'])->name('admin.prestasi.store');
-        Route::get('/prestasi/{id}/edit', [PrestasiController::class, 'edit'])->name('admin.prestasi.edit');
-        Route::put('/prestasi/{id}', [PrestasiController::class, 'update'])->name('admin.prestasi.update');
-        Route::delete('/prestasi/{id}', [PrestasiController::class, 'destroy'])->name('admin.prestasi.destroy');
-    });
+    Route::get('/prestasi/create', [PrestasiController::class, 'create'])->name('admin.prestasi.create');
+    Route::post('/prestasi', [PrestasiController::class, 'store'])->name('admin.prestasi.store');
+    Route::get('/prestasi/{id}/edit', [PrestasiController::class, 'edit'])->name('admin.prestasi.edit');
+    Route::put('/prestasi/{id}', [PrestasiController::class, 'update'])->name('admin.prestasi.update');
+    Route::delete('/prestasi/{id}', [PrestasiController::class, 'destroy'])->name('admin.prestasi.destroy');
 });
 
 // LANDING - TIDAK PERLU LOGIN
