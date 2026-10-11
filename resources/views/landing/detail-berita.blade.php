@@ -23,7 +23,7 @@
                 <h1 class="fw-bold text-dark mb-3">{{ $berita->judul }}</h1>
                 <div class="d-flex align-items-center text-muted mb-4">
                     <div class="bg-light rounded-3 p-3 me-3">
-                        <i class="bi bi-calendar3 text-gradient-sekolah fs-5"></i>
+                        <i class="bi bi-calendar3 text-success fs-5"></i>
                     </div>
                     <div>
                         <small class="text-muted d-block mb-1">Tanggal Berita</small>
@@ -35,7 +35,7 @@
                 <hr class="mb-4">
                 <div class="berita-content">
                     <h5 class="fw-bold text-dark mb-3">
-                        <i class="bi bi-info-circle-fill text-gradient-sekolah me-2"></i>
+                        <i class="bi bi-info-circle-fill text-success me-2"></i>
                         Isi Berita
                     </h5>
                     <div class="text-muted lh-lg">

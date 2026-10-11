@@ -22,7 +22,7 @@
                 <h1 class="fw-bold text-dark mb-4">{{ $prestasi->nama_prestasi }}</h1>
                 <div class="d-flex align-items-center mb-4">
                     <div class="bg-light rounded-3 p-3 me-3">
-                        <i class="bi bi-calendar3 text-gradient-sekolah fs-4"></i>
+                        <i class="bi bi-calendar3 text-success fs-4"></i>
                     </div>
                     <div>
                         <small class="text-muted d-block mb-1">Tahun Ajaran</small>
@@ -32,7 +32,7 @@
                 <hr class="mb-4">
                 <div>
                     <h5 class="fw-bold text-dark mb-3">
-                        <i class="bi bi-info-circle-fill text-gradient-sekolah me-2"></i>Deskripsi Prestasi
+                        <i class="bi bi-info-circle-fill text-success me-2"></i>Deskripsi Prestasi
                     </h5>
                     <div class="text-muted lh-lg">
                         {!! nl2br(e($prestasi->deskripsi)) !!}

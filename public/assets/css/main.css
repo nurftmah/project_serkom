@@ -2373,48 +2373,76 @@ span.flatpickr-weekday {
 /* =====================================================================
    16. Navbar Profile Dropdown Styles
    ===================================================================== */
+
 .navbar-profile-btn {
-    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px 12px;
+    min-height: 42px;
     border: none;
-    padding: 0.25rem 0;
+    border-radius: 10px;
+    background: transparent;
+    color: #1A3E30;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: none;
+}
+
+.navbar-profile-btn:hover,
+.navbar-profile-btn:focus,
+.navbar-profile-btn:active {
+    background: #edf3ee;
+    color: #1A3E30;
+    box-shadow: none;
+}
+
+.navbar-profile-btn::after {
+    display: none;
+}
+
+.navbar-profile-icon {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
-    border-radius: var(--radius-lg);
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-}
-
-.navbar-profile-btn:hover {
-    background-color: var(--bs-body-bg);
-}
-
-.navbar-profile-btn:focus {
-    outline: none;
-}
-
-.navbar-profile-btn.dropdown-toggle::after {
-    display: none !important;
-}
-
-.navbar-profile-img {
-    width: 38px;
-    height: 38px;
-    border-radius: var(--radius-lg);
-    object-fit: cover;
-    transition: border-color 0.2s;
-}
-
-.navbar-profile-btn:hover .navbar-profile-img {
-    border-color: var(--brand-lime-hover);
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e3f2f4;
+    color:#1A3E30;
+    font-size: 18px;
+    flex-shrink: 0;
 }
 
 .navbar-profile-name {
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: var(--text-main);
-    transition: color 0.2s;
+    font-size: 14px;
+    font-weight: 600;
 }
+
+.navbar-profile-caret {
+    font-size: 11px;
+    color: #7b8790;
+}
+
+.dropdown-menu-profile {
+    min-width: 200px;
+    padding: 8px;
+    border: 1px solid #edf0f2;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown-menu-profile .dropdown-item {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+/* .navbar-profile-btn:hover .navbar-profile-img {
+    border-color: var(--brand-lime-hover);
+}
+
 
 .navbar-profile-btn:hover .navbar-profile-name {
     color: var(--brand-forest-medium);
@@ -2432,7 +2460,7 @@ span.flatpickr-weekday {
 
 .navbar-profile-btn[aria-expanded="true"] .navbar-profile-caret {
     transform: rotate(180deg);
-}
+} */
 
 /* Custom Dropdown Menu for Profile */
 .dropdown-menu-profile {

@@ -12,7 +12,6 @@
                 @else
                     Administrator
                 @endauth
-                👋
             </h1>
             <p class="welcome-text">Kelola informasi sekolah, data guru, siswa, berita, galeri, dan prestasi dengan mudah.</p>
         </div>

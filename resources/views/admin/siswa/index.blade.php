@@ -8,11 +8,9 @@
             <p class="text-muted mb-0">Kelola data siswa sekolah</p>
         </div>
         @auth
-            @if(Auth::user()->role === 'Admin')
-                <a href="{{ route('admin.siswa.create') }}" class="btn btn-green">
-                    <i class="bi bi-plus-lg me-1"></i>Tambah Siswa
-                </a>
-            @endif
+            <a href="{{ route('admin.siswa.create') }}" class="btn btn-green">
+                <i class="bi bi-plus-lg me-1"></i>Tambah Siswa
+            </a>
         @endauth
     </div>
 
@@ -32,6 +30,15 @@
 
     <div class="card border-0 shadow-sm">
         <div class="card-body">
+            @auth
+                @if(Auth::user()->role === 'Operator')
+                    <div class="alert alert-info d-flex align-items-center mb-4">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <div>Anda login sebagai <strong>Operator</strong>. Anda dapat melihat, menambah, dan mengedit data siswa, tetapi tidak dapat menghapusnya.</div>
+                    </div>
+                @endif
+            @endauth
+
             <form action="{{ route('admin.siswa.index') }}" method="GET" class="mb-4">
                 <div class="row g-2">
                     <div class="col-md-4">
@@ -75,9 +82,7 @@
                             <th>Kelas</th>
                             <th>Tahun Masuk</th>
                             @auth
-                                @if(Auth::user()->role === 'Admin')
-                                    <th width="150">Aksi</th>
-                                @endif
+                                <th width="150">Aksi</th>
                             @endauth
                         </tr>
                     </thead>
@@ -91,11 +96,11 @@
                                 <td><span class="badge bg-light text-dark border">{{ $siswa->kelas }}</span></td>
                                 <td>{{ $siswa->tahun_masuk }}</td>
                                 @auth
-                                    @if(Auth::user()->role === 'Admin')
-                                        <td>
-                                            <a href="{{ route('admin.siswa.edit', ['id' => Crypt::encryptString((string)$siswa->id_siswa)]) }}" class="btn btn-sm btn-warning me-1" title="Edit">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
+                                    <td>
+                                        <a href="{{ route('admin.siswa.edit', ['id' => Crypt::encryptString((string)$siswa->id_siswa)]) }}" class="btn btn-sm btn-warning me-1" title="Edit">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        @if(Auth::user()->role === 'Admin')
                                             <form action="{{ route('admin.siswa.destroy', ['id' => Crypt::encryptString((string)$siswa->id_siswa)]) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
@@ -103,13 +108,13 @@
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>
-                                        </td>
-                                    @endif
+                                        @endif
+                                    </td>
                                 @endauth
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="{{ Auth::check() && Auth::user()->role === 'Admin' ? 7 : 6 }}" class="text-center py-5">
+                                <td colspan="{{ Auth::check() ? 7 : 6 }}" class="text-center py-5">
                                     <i class="bi bi-people fs-1 text-muted d-block mb-3"></i>
                                     <span class="text-muted">Belum ada data siswa.</span>
                                 </td>

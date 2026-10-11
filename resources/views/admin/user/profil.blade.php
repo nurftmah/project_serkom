@@ -40,18 +40,44 @@
                         @endif
                     </div>
                     <hr>
-                    <div class="profile-info">
-                        <div class="info-item">
-                            <i class="bi bi-person-circle"></i>
-                            <div><small>Username</small><strong>{{ $user->username }}</strong></div>
+                    <div class="mt-4 text-start">
+                        <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+                            <div class="bg-success-subtle text-success rounded-3 p-3">
+                                <i class="bi bi-person-circle fs-5"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <small class="text-muted d-block mb-1">Username</small>
+                                <span class="fw-semibold text-dark">{{ $user->username }}</span>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <i class="bi bi-shield-check"></i>
-                            <div><small>Role</small><strong>{{ $user->role }}</strong></div>
+
+                        <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+                            <div class="bg-success-subtle text-success rounded-3 p-3">
+                                <i class="bi bi-shield-check fs-5"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <small class="text-muted d-block mb-1">Role</small>
+                                @if($user->role == 'Admin')
+                                    <span class="badge rounded-pill bg-primary-subtle text-primary px-3 py-2">
+                                        <i class="bi bi-shield-check me-1"></i>Admin
+                                    </span>
+                                @else
+                                    <span class="badge rounded-pill bg-success-subtle text-success px-3 py-2">
+                                        <i class="bi bi-person-workspace me-1"></i>Operator
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <i class="bi bi-calendar3"></i>
-                            <div><small>Bergabung</small><strong>{{ $user->created_at->format('d-m-Y') }}</strong></div>
+                        <div class="d-flex align-items-center gap-3 py-3">
+                            <div class="bg-success-subtle text-success rounded-3 p-3">
+                                <i class="bi bi-calendar3 fs-5"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <small class="text-muted d-block mb-1">Bergabung</small>
+                                <span class="fw-semibold text-dark">
+                                    {{ $user->created_at->format('d-m-Y') }}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>

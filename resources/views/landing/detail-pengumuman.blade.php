@@ -18,7 +18,7 @@
 
                 <div class="d-flex align-items-center text-muted mb-4">
                     <div class="bg-light rounded-3 p-3 me-3">
-                        <i class="bi bi-calendar3 fs-4"></i>
+                        <i class="bi bi-calendar3 fs-4 text-success"></i>
                     </div>
                     <div>
                         <small class="text-muted d-block mb-1">Tanggal Pengumuman</small>
@@ -32,7 +32,7 @@
 
                 <div class="mt-4">
                     <h5 class="fw-bold text-dark mb-3">
-                        <i class="bi bi-info-circle-fill text-gradient-sekolah me-2"></i>
+                        <i class="bi bi-info-circle-fill text-success me-2"></i>
                         Isi Pengumuman
                     </h5>
                     <div class="text-muted">

@@ -8,11 +8,9 @@
             <p class="text-muted mb-0">Kelola data guru sekolah</p>
         </div>
         @auth
-            @if(Auth::user()->role === 'Admin')
-                <a href="{{ route('admin.guru.create') }}" class="btn btn-green">
-                    <i class="bi bi-plus me-1"></i> Tambah Guru
-                </a>
-            @endif
+            <a href="{{ route('admin.guru.create') }}" class="btn btn-green">
+                <i class="bi bi-plus me-1"></i> Tambah Guru
+            </a>
         @endauth
     </div>
     @if(session('success'))
@@ -24,7 +22,7 @@
                 @if(Auth::user()->role === 'Operator')
                     <div class="alert alert-info d-flex align-items-center mb-4">
                         <i class="bi bi-info-circle me-2"></i>
-                        <div>Anda login sebagai <strong>Operator</strong>. Anda hanya dapat melihat data guru.</div>
+                        <div>Anda login sebagai <strong>Operator</strong>. Anda dapat melihat, menambah, dan mengedit data guru, tetapi tidak dapat menghapusnya.</div>
                     </div>
                 @endif
             @endauth
@@ -68,9 +66,7 @@
                             <th>NIP</th>
                             <th>Mata Pelajaran</th>
                             @auth
-                                @if(Auth::user()->role === 'Admin')
-                                    <th style="width: 100px;" class="text-center">Aksi</th>
-                                @endif
+                                <th style="width: 100px;" class="text-center">Aksi</th>
                             @endauth
                         </tr>
                     </thead>
@@ -89,12 +85,12 @@
                                 <td>{{ $guru->nip }}</td>
                                 <td>{{ $guru->mapel }}</td>
                                 @auth
-                                    @if(Auth::user()->role === 'Admin')
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center gap-2">
-                                                <a href="{{ route('admin.guru.edit', ['id' => Crypt::encryptString((string) $guru->id_guru)]) }}" class="btn btn-warning btn-sm" title="Edit">
-                                                    <i class="bi bi-pencil"></i>
-                                                </a>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <a href="{{ route('admin.guru.edit', ['id' => Crypt::encryptString((string) $guru->id_guru)]) }}" class="btn btn-warning btn-sm" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            @if(Auth::user()->role === 'Admin')
                                                 <form action="{{ route('admin.guru.destroy', ['id' => Crypt::encryptString((string) $guru->id_guru)]) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data guru ini?')">
                                                     @csrf
                                                     @method('DELETE')
@@ -102,14 +98,14 @@
                                                         <i class="bi bi-trash"></i>
                                                     </button>
                                                 </form>
-                                            </div>
-                                        </td>
-                                    @endif
+                                            @endif
+                                        </div>
+                                    </td>
                                 @endauth
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="{{ Auth::check() && Auth::user()->role === 'Admin' ? 6 : 5 }}" class="text-center py-4">
+                                <td colspan="{{ Auth::check() ? (Auth::user()->role === 'Admin' || Auth::user()->role === 'Operator' ? 6 : 5) : 5 }}" class="text-center py-4">
                                     <div class="text-muted">
                                         <i class="bi bi-person-x" style="font-size: 40px;"></i>
                                         <p class="mt-2 mb-0">Belum ada data guru.</p>

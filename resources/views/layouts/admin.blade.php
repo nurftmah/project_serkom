@@ -68,16 +68,16 @@
                             <span>Kelola Data Siswa</span>
                         </a>
                     </li>
-                    <li class="sidebar-menu-item">
-                        <a href="{{ route('admin.ekstrakurikuler.index') }}" class="sidebar-menu-link {{ request()->routeIs('admin.ekstrakurikuler.*') ? 'active' : '' }}">
-                            <i class="bi bi-trophy-fill"></i>
-                            <span>Kelola Ekstrakurikuler</span>
-                        </a>
-                    </li>
                 </ul>
             </div>
             <div class="sidebar-menu-section">
                 <div class="sidebar-menu-title">INFORMASI SEKOLAH</div>
+                <li class="sidebar-menu-item">
+                    <a href="{{ route('admin.ekstrakurikuler.index') }}" class="sidebar-menu-link {{ request()->routeIs('admin.ekstrakurikuler.*') ? 'active' : '' }}">
+                        <i class="bi bi-trophy-fill"></i>
+                        <span>Kelola Ekstrakurikuler</span>
+                    </a>
+                </li>
                 <ul class="sidebar-menu-list">
                     <li class="sidebar-menu-item">
                         <a href="{{ route('admin.berita.index') }}" class="sidebar-menu-link {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
@@ -135,10 +135,10 @@
             <div class="navbar-actions">
                 <div class="dropdown ms-3">
                     <button class="navbar-profile-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="navbar-profile-icon">
+                        <span class="navbar-profile-icon">
                             <i class="bi bi-person-fill"></i>
-                        </div>
-                        <span class="navbar-profile-name d-none d-md-inline">
+                        </span>
+                        <span class="navbar-profile-name">
                             @auth
                                 {{ Auth::user()->username }}
                             @else

@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-light rounded-4 p-4 mt-4">
+                    {{-- <div class="bg-light rounded-4 p-4 mt-4">
                         <div class="d-flex">
                             <i class="bi bi-info-circle-fill text-success fs-4 me-3"></i>
                             <div>
@@ -67,7 +67,7 @@
                                 <p class="text-muted mb-0">Guru MTS AL-AZHAR yang berperan dalam mendampingi dan memberikan pembelajaran kepada siswa sesuai dengan bidang mata pelajaran yang diampu.</p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mt-4">
