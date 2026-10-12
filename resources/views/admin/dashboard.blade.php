@@ -2,6 +2,13 @@
 @section('title', 'Dashboard')
 @section('content')
 <div class="school-dashboard">
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="dashboard-welcome">
         <div class="welcome-content">
             <div class="welcome-small">SchoolHub</div>

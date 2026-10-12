@@ -115,6 +115,17 @@ class GaleriController extends Controller
                 'file' => $namaFile,
                 'kategori' => $request->kategori,
                 'tanggal' => $request->tanggal,
+            ],[
+                'nama_ekskul.required' => 'Nama ekstrakurikuler wajib diisi.',
+                'nama_ekskul.max' => 'Nama ekstrakurikuler maksimal 40 karakter.',
+                'id_guru.required' => 'Pembina ekstrakurikuler wajib dipilih.',
+                'id_guru.exists' => 'Pembina yang dipilih tidak ditemukan.',
+                'jadwal_latihan.required' => 'Jadwal latihan wajib diisi.',
+                'jadwal_latihan.max' => 'Jadwal latihan maksimal 40 karakter.',
+                'deskripsi.required' => 'Deskripsi ekstrakurikuler wajib diisi.',
+                'gambar.image' => 'File yang diunggah harus berupa gambar.',
+                'gambar.mimes' => 'Gambar harus berformat JPG, JPEG, PNG, atau JFIF.',
+                'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
             ]);
 
             return redirect()

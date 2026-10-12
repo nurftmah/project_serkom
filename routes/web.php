@@ -131,3 +131,7 @@ Route::get('/pengumuman', [LandingController::class, 'pengumuman'])->name('landi
 Route::get('/pengumuman/{id}', [LandingController::class, 'detailPengumuman'])->name('landing.pengumuman.show');
 
 Route::get('/tentang', [LandingController::class, 'tentang'])->name('landing.tentang');
+
+Route::get('/ujikom', [LandingController::class, 'ujikom'])->name('landing.ujikom');
+Route::post('/ujikom', [LandingController::class, 'hitung'])->name('landing.ujikom.hitung');
+

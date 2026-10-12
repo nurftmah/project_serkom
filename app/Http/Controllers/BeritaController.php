@@ -33,6 +33,21 @@ class BeritaController extends Controller
             'tanggal' => 'required|date',
             'gambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'status' => 'required|in:Publish,Draft',
+        ],[
+            'judul.required' => 'Judul berita wajib diisi.',
+            'judul.max' => 'Judul berita maksimal 50 karakter.',
+            'slug.required' => 'Slug berita wajib diisi.',
+            'slug.max' => 'Slug maksimal 100 karakter.',
+            'slug.unique' => 'Slug tersebut sudah digunakan.',
+            'isi.required' => 'Isi berita wajib diisi.',
+            'tanggal.required' => 'Tanggal berita wajib diisi.',
+            'tanggal.date' => 'Format tanggal tidak valid.',
+            'gambar.required' => 'Gambar berita wajib diunggah.',
+            'gambar.image' => 'File yang diunggah harus berupa gambar.',
+            'gambar.mimes' => 'Gambar harus berformat JPG, JPEG, atau PNG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            'status.required' => 'Status berita wajib dipilih.',
+            'status.in' => 'Status berita harus Publish atau Draft.',
         ]);
 
         $namaGambar = basename(
@@ -100,6 +115,21 @@ class BeritaController extends Controller
             'tanggal' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'status' => 'required|in:Publish,Draft',
+        ],[
+            'judul.required' => 'Judul berita wajib diisi.',
+            'judul.max' => 'Judul berita maksimal 50 karakter.',
+            'slug.required' => 'Slug berita wajib diisi.',
+            'slug.max' => 'Slug maksimal 100 karakter.',
+            'slug.unique' => 'Slug tersebut sudah digunakan.',
+            'isi.required' => 'Isi berita wajib diisi.',
+            'tanggal.required' => 'Tanggal berita wajib diisi.',
+            'tanggal.date' => 'Format tanggal tidak valid.',
+            'gambar.required' => 'Gambar berita wajib diunggah.',
+            'gambar.image' => 'File yang diunggah harus berupa gambar.',
+            'gambar.mimes' => 'Gambar harus berformat JPG, JPEG, atau PNG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            'status.required' => 'Status berita wajib dipilih.',
+            'status.in' => 'Status berita harus Publish atau Draft.',
         ]);
 
         $namaGambar = $berita->gambar;

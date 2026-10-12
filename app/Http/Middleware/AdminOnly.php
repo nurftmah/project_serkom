@@ -18,9 +18,8 @@ class AdminOnly
 
         // Jika bukan Admin
         if (Auth::user()->role !== 'Admin') {
-            // abort(403, 'Anda tidak memiliki akses untuk melakukan tindakan ini.');
-            // return $next($request);
-            return redirect()->route('admin.dashboard')->with('Anda tidak memiliki akses untuk melakukan tindakan ini');
+            return redirect()->route('admin.dashboard')
+                ->with('error', 'Operator tidak memiliki hak akses ke menu Pengguna.');
         }
 
         return $next($request);

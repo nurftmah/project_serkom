@@ -24,6 +24,18 @@ class PrestasiController extends Controller
             'deskripsi' => 'required|string',
             'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'tahun_ajaran' => 'required|integer',
+        ],[
+            'nama_prestasi.required' => 'Nama prestasi wajib diisi.',
+            'nama_prestasi.string' => 'Nama prestasi harus berupa teks.',
+            'nama_prestasi.max' => 'Nama prestasi maksimal 40 karakter.',
+            'deskripsi.required' => 'Deskripsi prestasi wajib diisi.',
+            'deskripsi.string' => 'Deskripsi prestasi harus berupa teks.',
+            'foto.required' => 'Foto prestasi wajib diunggah.',
+            'foto.image' => 'File yang diunggah harus berupa gambar.',
+            'foto.mimes' => 'Foto harus berformat JPG, JPEG, atau PNG.',
+            'foto.max' => 'Ukuran foto maksimal 2 MB.',
+            'tahun_ajaran.required' => 'Tahun ajaran wajib diisi.',
+            'tahun_ajaran.integer' => 'Tahun ajaran harus berupa angka.',
         ]);
         $namaFoto = basename($request->file('foto')->store('prestasi', 'public'));
         Prestasi::create([
@@ -61,6 +73,17 @@ class PrestasiController extends Controller
                 'deskripsi' => 'required|string',
                 'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
                 'tahun_ajaran' => 'required|integer',
+            ],[
+                'nama_prestasi.required' => 'Nama prestasi wajib diisi.',
+                'nama_prestasi.string' => 'Nama prestasi harus berupa teks.',
+                'nama_prestasi.max' => 'Nama prestasi maksimal 40 karakter.',
+                'deskripsi.required' => 'Deskripsi prestasi wajib diisi.',
+                'deskripsi.string' => 'Deskripsi prestasi harus berupa teks.',
+                'foto.image' => 'File yang diunggah harus berupa gambar.',
+                'foto.mimes' => 'Foto harus berformat JPG, JPEG, atau PNG.',
+                'foto.max' => 'Ukuran foto maksimal 2 MB.',
+                'tahun_ajaran.required' => 'Tahun ajaran wajib diisi.',
+                'tahun_ajaran.integer' => 'Tahun ajaran harus berupa angka.',
             ]);
             $namaFoto = $prestasi->foto;
             if ($request->hasFile('foto')) {

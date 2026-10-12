@@ -106,6 +106,12 @@
                     <li class="nav-item">
                         <a href="{{ route('landing.galeri') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.galeri*') ? 'active' : '' }}">Galeri</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('landing.ujikom') }}" class="nav-link rounded-3 px-2 {{ request()->routeIs('landing.ujikom*') ? 'active' : '' }}">Ujikom</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link rounded-3 px-2">Login</a>
+                    </li>
                 </ul>
             </div>
         </div>

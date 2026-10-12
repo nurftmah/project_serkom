@@ -46,6 +46,17 @@ class GuruController extends Controller
             'nip' => 'required|max:15',
             'mapel' => 'required|max:40',
             'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ], [
+            'nama_guru.required' => 'Nama guru wajib diisi.',
+            'nama_guru.max' => 'Nama guru maksimal 40 karakter.',
+            'nip.required' => 'NIP wajib diisi.',
+            'nip.max' => 'NIP maksimal 15 karakter.',
+            'mapel.required' => 'Mata pelajaran wajib diisi.',
+            'mapel.max' => 'Mata pelajaran maksimal 40 karakter.',
+            'foto.required' => 'Foto guru wajib diunggah.',
+            'foto.image' => 'File yang diunggah harus berupa gambar.',
+            'foto.mimes' => 'Foto harus berformat JPG, JPEG, atau PNG.',
+            'foto.max' => 'Ukuran foto maksimal 2 MB.',
         ]);
         $namaFoto = $request->file('foto')->store('guru', 'public');
         Guru::create([
@@ -82,7 +93,18 @@ class GuruController extends Controller
                 'nip' => 'required|max:15',
                 'mapel' => 'required|max:40',
                 'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            ], [
+                'nama_guru.required' => 'Nama guru wajib diisi.',
+                'nama_guru.max' => 'Nama guru maksimal 40 karakter.',
+                'nip.required' => 'NIP wajib diisi.',
+                'nip.max' => 'NIP maksimal 15 karakter.',
+                'mapel.required' => 'Mata pelajaran wajib diisi.',
+                'mapel.max' => 'Mata pelajaran maksimal 40 karakter.',
+                'foto.image' => 'File yang diunggah harus berupa gambar.',
+                'foto.mimes' => 'Foto harus berformat JPG, JPEG, atau PNG.',
+                'foto.max' => 'Ukuran foto maksimal 2 MB.',
             ]);
+
             $namaFoto = $guru->foto;
             if ($request->hasFile('foto')) {
                 $fotoBaru = $request->file('foto')->store('guru', 'public');

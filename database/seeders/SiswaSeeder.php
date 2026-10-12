@@ -17,22 +17,28 @@ class SiswaSeeder extends Seeder
                 'jenis_kelamin' => 'Laki-Laki',
                 'kelas' => 'IX A',
                 'tahun_masuk' => 2024,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id_siswa' => 2,
                 'nisn' => '0012345679',
-                'nama_siswa' => 'Aulia Putri',
+                'nama_siswa' => 'Aulia Putri Kemala',
                 'jenis_kelamin' => 'Perempuan',
                 'kelas' => 'IX B',
                 'tahun_masuk' => 2024,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
-             [
+            [
                 'id_siswa' => 3,
                 'nisn' => '0012345671',
                 'nama_siswa' => 'Arsha Alghifar',
                 'jenis_kelamin' => 'Laki-Laki',
                 'kelas' => 'VII A',
                 'tahun_masuk' => 2026,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id_siswa' => 4,
@@ -41,6 +47,8 @@ class SiswaSeeder extends Seeder
                 'jenis_kelamin' => 'Perempuan',
                 'kelas' => 'VIII B',
                 'tahun_masuk' => 2025,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id_siswa' => 5,
@@ -49,6 +57,18 @@ class SiswaSeeder extends Seeder
                 'jenis_kelamin' => 'Perempuan',
                 'kelas' => 'IX B',
                 'tahun_masuk' => 2024,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_siswa' => 6,
+                'nisn' => '0012345677',
+                'nama_siswa' => 'Lutfi Ridho',
+                'jenis_kelamin' => 'Laki-Laki',
+                'kelas' => 'IX A',
+                'tahun_masuk' => 2022,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

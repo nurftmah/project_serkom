@@ -11,6 +11,7 @@ use App\Models\Prestasi;
 use App\Models\Profil;
 use App\Models\Siswa;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
 class LandingController extends Controller
@@ -214,4 +215,26 @@ class LandingController extends Controller
         return view('landing.tentang', compact('profils'));
     }
 
+    public function ujikom()
+    {
+        return view('landing.ujikom');
+    }
+
+    public function hitung(Request $request)
+    {
+        $request->validate([
+            'barang1' => 'required|string',
+            'harga1' => 'required|numeric|min:0',
+            'barang2' => 'required|string',
+            'harga2' => 'required|numeric|min:0',
+        ]);
+
+        $total = $request->harga1 + $request->harga2;
+        if ($total > 500000){
+            $hadiah = 'Mendapatkan gelas cantik';
+        } else {
+            $hadiah = 'Mendapatkan pensil';
+        }
+        return view('landing.ujikom', compact('request', 'total', 'hadiah'));
+    }
 }

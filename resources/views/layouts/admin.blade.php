@@ -167,7 +167,7 @@
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             @auth
-                                <form action="{{ route('logout') }}" method="POST">
+                                <form action="{{ route('home') }}" method="GET">
                                     @csrf
                                     <button type="submit" class="dropdown-item text-danger">
                                         <i class="bi bi-box-arrow-right me-2"></i>

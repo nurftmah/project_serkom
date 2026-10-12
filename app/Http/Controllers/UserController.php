@@ -46,6 +46,15 @@ class UserController extends Controller
             'username' => 'required|max:30|unique:users,username',
             'password' => 'required|min:6|confirmed',
             'role' => 'required|in:Admin,Operator',
+        ],[
+            'username.required' => 'Username wajib diisi.',
+            'username.max' => 'Username maksimal 30 karakter.',
+            'username.unique' => 'Username sudah digunakan. Silakan gunakan username lain.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 6 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak sesuai.',
+            'role.required' => 'Role wajib dipilih.',
+            'role.in' => 'Role yang dipilih tidak valid.',
         ]);
 
         User::create([
@@ -86,6 +95,12 @@ class UserController extends Controller
         $request->validate([
             'username' => 'required|max:30|unique:users,username,' . $id,
             'role' => 'required|in:Admin,Operator',
+        ], [
+            'username.required' => 'Username wajib diisi.',
+            'username.max' => 'Username maksimal 30 karakter.',
+            'username.unique' => 'Username sudah digunakan. Silakan gunakan username lain.',
+            'role.required' => 'Role wajib dipilih.',
+            'role.in' => 'Role yang dipilih tidak valid.',
         ]);
 
         // Update username

@@ -29,6 +29,14 @@ class PengumumanController extends Controller
             'isi' => 'required',
             'tanggal' => 'required|date',
             'status' => 'required|in:Publish,Draft',
+        ], [
+            'judul.required' => 'Judul pengumuman wajib diisi.',
+            'judul.max' => 'Judul pengumuman maksimal 50 karakter.',
+            'isi.required' => 'Isi pengumuman wajib diisi.',
+            'tanggal.required' => 'Tanggal pengumuman wajib diisi.',
+            'tanggal.date' => 'Format tanggal pengumuman tidak valid.',
+            'status.required' => 'Status pengumuman wajib dipilih.',
+            'status.in' => 'Status pengumuman harus Publish atau Draft.',
         ]);
 
         if (!Auth::check()) {
@@ -88,6 +96,14 @@ class PengumumanController extends Controller
                 'isi' => 'required',
                 'tanggal' => 'required|date',
                 'status' => 'required|in:Publish,Draft',
+            ], [
+                'judul.required' => 'Judul pengumuman wajib diisi.',
+                'judul.max' => 'Judul pengumuman maksimal 50 karakter.',
+                'isi.required' => 'Isi pengumuman wajib diisi.',
+                'tanggal.required' => 'Tanggal pengumuman wajib diisi.',
+                'tanggal.date' => 'Format tanggal pengumuman tidak valid.',
+                'status.required' => 'Status pengumuman wajib dipilih.',
+                'status.in' => 'Status pengumuman harus Publish atau Draft.',
             ]);
 
             $pengumuman->update([

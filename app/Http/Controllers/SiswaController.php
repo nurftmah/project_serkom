@@ -40,6 +40,21 @@ class SiswaController extends Controller
             'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
             'kelas' => 'required|in:VII A,VII B,VIII A,VIII B,IX A,IX B',
             'tahun_masuk' => 'required|integer|min:2000|max:2100',
+        ],[
+            'nisn.required' => 'NISN wajib diisi.',
+            'nisn.string' => 'NISN harus berupa teks.',
+            'nisn.max' => 'NISN maksimal 10 karakter.',
+            'nama_siswa.required' => 'Nama siswa wajib diisi.',
+            'nama_siswa.string' => 'Nama siswa harus berupa teks.',
+            'nama_siswa.max' => 'Nama siswa maksimal 40 karakter.',
+            'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
+            'jenis_kelamin.in' => 'Jenis kelamin yang dipilih tidak valid.',
+            'kelas.required' => 'Kelas wajib dipilih.',
+            'kelas.in' => 'Kelas yang dipilih tidak valid.',
+            'tahun_masuk.required' => 'Tahun masuk wajib diisi.',
+            'tahun_masuk.integer' => 'Tahun masuk harus berupa angka.',
+            'tahun_masuk.min' => 'Tahun masuk minimal 2000.',
+            'tahun_masuk.max' => 'Tahun masuk maksimal 2100.',
         ]);
 
         Siswa::create([
@@ -90,6 +105,21 @@ class SiswaController extends Controller
                 'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
                 'kelas' => 'required|in:VII A,VII B,VIII A,VIII B,IX A,IX B',
                 'tahun_masuk' => 'required|integer|min:2000|max:2100',
+            ],[
+                'nisn.required' => 'NISN wajib diisi.',
+                'nisn.string' => 'NISN harus berupa teks.',
+                'nisn.max' => 'NISN maksimal 10 karakter.',
+                'nama_siswa.required' => 'Nama siswa wajib diisi.',
+                'nama_siswa.string' => 'Nama siswa harus berupa teks.',
+                'nama_siswa.max' => 'Nama siswa maksimal 40 karakter.',
+                'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
+                'jenis_kelamin.in' => 'Jenis kelamin yang dipilih tidak valid.',
+                'kelas.required' => 'Kelas wajib dipilih.',
+                'kelas.in' => 'Kelas yang dipilih tidak valid.',
+                'tahun_masuk.required' => 'Tahun masuk wajib diisi.',
+                'tahun_masuk.integer' => 'Tahun masuk harus berupa angka.',
+                'tahun_masuk.min' => 'Tahun masuk minimal 2000.',
+                'tahun_masuk.max' => 'Tahun masuk maksimal 2100.',
             ]);
 
             $siswa->update([
